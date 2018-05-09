@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:idemia="utn.frsf.cidisi" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_xBq9AVMXEeiLvc-boIS_pw" type="Idemia" name="modeloCarToy.idemia_diagram" measurementUnit="Pixel">
+  <children xmi:type="notation:Shape" xmi:id="_zceLgFMXEeiLvc-boIS_pw" type="2001" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_zceLglMXEeiLvc-boIS_pw" type="5013"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_zceLg1MXEeiLvc-boIS_pw" type="7001">
+      <children xmi:type="notation:Shape" xmi:id="_3r3kIFMXEeiLvc-boIS_pw" type="3003" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_3r3kIlMXEeiLvc-boIS_pw" type="5005"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_3r3kI1MXEeiLvc-boIS_pw" type="5006"/>
+        <element xmi:type="idemia:Goal" href="default.idemia#//@Agent/@Goal"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3r3kIVMXEeiLvc-boIS_pw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_zceLhFMXEeiLvc-boIS_pw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_zceLhVMXEeiLvc-boIS_pw"/>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_zceLhlMXEeiLvc-boIS_pw" type="7002">
+      <children xmi:type="notation:Shape" xmi:id="_-9zEMFMYEeiLvc-boIS_pw" type="3001" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_-9zEMlMYEeiLvc-boIS_pw" type="5004"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_-9zEM1MYEeiLvc-boIS_pw" type="7004">
+          <children xmi:type="notation:Shape" xmi:id="_Ab72IFMZEeiLvc-boIS_pw" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_Ab72IlMZEeiLvc-boIS_pw" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_Ab72I1MZEeiLvc-boIS_pw" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_Ab72JFMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_Ab72JVMZEeiLvc-boIS_pw" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Agent/@AgentState/@DataStructure.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ab72IVMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_ImKFkFMZEeiLvc-boIS_pw" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_ImKFklMZEeiLvc-boIS_pw" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_ImKFk1MZEeiLvc-boIS_pw" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_ImKFlFMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_ImLTsFMZEeiLvc-boIS_pw" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Agent/@AgentState/@DataStructure.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ImKFkVMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_MYDp4FMZEeiLvc-boIS_pw" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_MYDp4lMZEeiLvc-boIS_pw" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_MYDp41MZEeiLvc-boIS_pw" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_MYDp5FMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_MYNa4FMZEeiLvc-boIS_pw" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Agent/@AgentState/@DataStructure.2"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_MYDp4VMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_lJNPUFMZEeiLvc-boIS_pw" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_lJN2YFMZEeiLvc-boIS_pw" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_lJN2YVMZEeiLvc-boIS_pw" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_lJN2YlMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_lJN2Y1MZEeiLvc-boIS_pw" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Agent/@AgentState/@DataStructure.3"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lJNPUVMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_mpq8gFMZEeiLvc-boIS_pw" type="3002" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_mpq8glMZEeiLvc-boIS_pw" type="5001"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_mpq8g1MZEeiLvc-boIS_pw" type="5002">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_mpq8hFMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_mpq8hVMZEeiLvc-boIS_pw" type="5003"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Agent/@AgentState/@DataStructure.4"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mpq8gVMZEeiLvc-boIS_pw"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_-9zENFMYEeiLvc-boIS_pw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_-9zENVMYEeiLvc-boIS_pw"/>
+        </children>
+        <element xmi:type="idemia:State" href="default.idemia#//@Agent/@AgentState"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-9zEMVMYEeiLvc-boIS_pw" x="25" y="4" width="285" height="167"/>
+      </children>
+    </children>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_zceLh1MXEeiLvc-boIS_pw" type="7003">
+      <children xmi:type="notation:Shape" xmi:id="_Y-tBUFMZEeiLvc-boIS_pw" type="3004" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_Y-tBUlMZEeiLvc-boIS_pw" type="5007"/>
+        <children xmi:type="notation:DecorationNode" xmi:id="_Y-tBU1MZEeiLvc-boIS_pw" type="5008"/>
+        <element xmi:type="idemia:Search" href="default.idemia#//@Agent/@Strategy"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Y-tBUVMZEeiLvc-boIS_pw"/>
+      </children>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_zceLiFMXEeiLvc-boIS_pw"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_zceLiVMXEeiLvc-boIS_pw"/>
+    </children>
+    <element xmi:type="idemia:Agent" href="default.idemia#//@Agent"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zceLgVMXEeiLvc-boIS_pw" x="60" y="75" width="376" height="631"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_0YGtUFMXEeiLvc-boIS_pw" type="2002" fontName="Segoe UI">
+    <children xmi:type="notation:DecorationNode" xmi:id="_0YGtUlMXEeiLvc-boIS_pw" type="5018"/>
+    <children xmi:type="notation:BasicCompartment" xmi:id="_0YQeUFMXEeiLvc-boIS_pw" type="7005">
+      <children xmi:type="notation:Shape" xmi:id="_an83EFMZEeiLvc-boIS_pw" type="3008" fontName="Segoe UI">
+        <children xmi:type="notation:DecorationNode" xmi:id="_an83ElMZEeiLvc-boIS_pw" type="5017"/>
+        <children xmi:type="notation:BasicCompartment" xmi:id="_an83E1MZEeiLvc-boIS_pw" type="7006">
+          <children xmi:type="notation:Shape" xmi:id="_bnQX8FMZEeiLvc-boIS_pw" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_bnQX8lMZEeiLvc-boIS_pw" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_bnQX81MZEeiLvc-boIS_pw" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_bnQX9FMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_bnQX9VMZEeiLvc-boIS_pw" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Environment/@EnvironmentState/@DataStructure.0"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bnQX8VMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_fZhvsFMZEeiLvc-boIS_pw" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_fZhvslMZEeiLvc-boIS_pw" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_fZhvs1MZEeiLvc-boIS_pw" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_fZhvtFMZEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_fZhvtVMZEeiLvc-boIS_pw" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Environment/@EnvironmentState/@DataStructure.1"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_fZhvsVMZEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_NmZ24FMaEeiLvc-boIS_pw" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_NmZ24lMaEeiLvc-boIS_pw" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_NmZ241MaEeiLvc-boIS_pw" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_NmZ25FMaEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_NmZ25VMaEeiLvc-boIS_pw" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Environment/@EnvironmentState/@DataStructure.2"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NmZ24VMaEeiLvc-boIS_pw"/>
+          </children>
+          <children xmi:type="notation:Shape" xmi:id="_jS4KYFMaEeiLvc-boIS_pw" type="3009" fontName="Segoe UI">
+            <children xmi:type="notation:DecorationNode" xmi:id="_jS4KYlMaEeiLvc-boIS_pw" type="5014"/>
+            <children xmi:type="notation:DecorationNode" xmi:id="_jS4KY1MaEeiLvc-boIS_pw" type="5015">
+              <styles xmi:type="notation:DescriptionStyle" xmi:id="_jS4KZFMaEeiLvc-boIS_pw"/>
+            </children>
+            <children xmi:type="notation:DecorationNode" xmi:id="_jS4KZVMaEeiLvc-boIS_pw" type="5016"/>
+            <element xmi:type="idemia:DataStructure" href="default.idemia#//@Environment/@EnvironmentState/@DataStructure.3"/>
+            <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jS4KYVMaEeiLvc-boIS_pw"/>
+          </children>
+          <styles xmi:type="notation:SortingStyle" xmi:id="_an83FFMZEeiLvc-boIS_pw"/>
+          <styles xmi:type="notation:FilteringStyle" xmi:id="_an83FVMZEeiLvc-boIS_pw"/>
+        </children>
+        <element xmi:type="idemia:State" href="default.idemia#//@Environment/@EnvironmentState"/>
+        <layoutConstraint xmi:type="notation:Bounds" xmi:id="_an83EVMZEeiLvc-boIS_pw" x="29" y="15" width="267" height="268"/>
+      </children>
+    </children>
+    <element xmi:type="idemia:Environment" href="default.idemia#//@Environment"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0YGtUVMXEeiLvc-boIS_pw" x="600" y="75" width="316" height="616"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_xBq9AlMXEeiLvc-boIS_pw"/>
+  <element xmi:type="idemia:AgentModel" href="default.idemia#/"/>
+  <edges xmi:type="notation:Edge" xmi:id="_4FXh4FMaEeiLvc-boIS_pw" type="4001" source="_zceLgFMXEeiLvc-boIS_pw" target="_0YGtUFMXEeiLvc-boIS_pw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_4FXh5FMaEeiLvc-boIS_pw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_4FXh5VMaEeiLvc-boIS_pw" x="2" y="-6"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_4FXh4VMaEeiLvc-boIS_pw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_4FXh4lMaEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="default.idemia#//@Actions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4FXh41MaEeiLvc-boIS_pw" points="[25, -31, -169, -31]$[189, -31, -5, -31]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4F9-0FMaEeiLvc-boIS_pw" id="(0.9335106382978723,0.07389162561576355)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4F9-0VMaEeiLvc-boIS_pw" id="(0.015822784810126583,0.07467532467532467)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_9ccUQFMaEeiLvc-boIS_pw" type="4001" source="_zceLgFMXEeiLvc-boIS_pw" target="_0YGtUFMXEeiLvc-boIS_pw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_9ccURFMaEeiLvc-boIS_pw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_9ccURVMaEeiLvc-boIS_pw"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_9ccUQVMaEeiLvc-boIS_pw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_9ccUQlMaEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="default.idemia#//@Actions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_9ccUQ1MaEeiLvc-boIS_pw" points="[17, 0, -187, -3]$[190, -25, -14, -28]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9cleMFMaEeiLvc-boIS_pw" id="(0.9547872340425532,0.039619651347068144)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_9cleMVMaEeiLvc-boIS_pw" id="(0.07278481012658228,0.045454545454545456)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="_-wumoFMaEeiLvc-boIS_pw" type="4001" source="_zceLgFMXEeiLvc-boIS_pw" target="_0YGtUFMXEeiLvc-boIS_pw">
+    <children xmi:type="notation:DecorationNode" xmi:id="_-wumpFMaEeiLvc-boIS_pw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_-wumpVMaEeiLvc-boIS_pw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="_-wumoVMaEeiLvc-boIS_pw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="_-wumolMaEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="default.idemia#//@Actions.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-wumo1MaEeiLvc-boIS_pw" points="[8, 0, -168, 0]$[172, -7, -4, -7]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-wumplMaEeiLvc-boIS_pw" id="(0.9787234042553191,0.07606973058637084)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-wump1MaEeiLvc-boIS_pw" id="(0.012658227848101266,0.07792207792207792)"/>
+  </edges>
+  <edges xmi:type="notation:Edge" xmi:id="__ggdwFMaEeiLvc-boIS_pw" type="4001" source="_zceLgFMXEeiLvc-boIS_pw" target="_0YGtUFMXEeiLvc-boIS_pw">
+    <children xmi:type="notation:DecorationNode" xmi:id="__ggdxFMaEeiLvc-boIS_pw" type="6001">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="__ggdxVMaEeiLvc-boIS_pw" y="40"/>
+    </children>
+    <styles xmi:type="notation:RoutingStyle" xmi:id="__ggdwVMaEeiLvc-boIS_pw" routing="Rectilinear"/>
+    <styles xmi:type="notation:FontStyle" xmi:id="__ggdwlMaEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Action" href="default.idemia#//@Actions.3"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="__ggdw1MaEeiLvc-boIS_pw" points="[17, 0, -255, -3]$[243, -88, -29, -91]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="__ggdxlMaEeiLvc-boIS_pw" id="(0.9547872340425532,0.13946117274167988)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="__ggdx1MaEeiLvc-boIS_pw" id="(0.2879746835443038,0.14772727272727273)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_CBtPMFMbEeiLvc-boIS_pw" type="4002" source="_0YGtUFMXEeiLvc-boIS_pw" target="_zceLgFMXEeiLvc-boIS_pw" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_CBtPM1MbEeiLvc-boIS_pw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_CBtPNFMbEeiLvc-boIS_pw" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_CBtPMVMbEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="default.idemia#//@Perceptions.0"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_CBtPMlMbEeiLvc-boIS_pw" points="[-27, -3, 189, 15]$[-191, -53, 25, -35]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CB3AMFMbEeiLvc-boIS_pw" id="(0.08544303797468354,0.17694805194805194)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_CB3AMVMbEeiLvc-boIS_pw" id="(0.9335106382978723,0.14421553090332806)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_FKovAFMbEeiLvc-boIS_pw" type="4002" source="_0YGtUFMXEeiLvc-boIS_pw" target="_zceLgFMXEeiLvc-boIS_pw" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_FKx48FMbEeiLvc-boIS_pw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_FKx48VMbEeiLvc-boIS_pw" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_FKovAVMbEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="default.idemia#//@Perceptions.1"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_FKovAlMbEeiLvc-boIS_pw" points="[-30, 0, 264, -3]$[-271, -64, 23, -67]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FKx48lMbEeiLvc-boIS_pw" id="(0.0949367088607595,0.1038961038961039)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_FKx481MbEeiLvc-boIS_pw" id="(0.7340425531914894,0.10618066561014262)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_GVAQYFMbEeiLvc-boIS_pw" type="4002" source="_0YGtUFMXEeiLvc-boIS_pw" target="_zceLgFMXEeiLvc-boIS_pw" routing="Rectilinear">
+    <children xmi:type="notation:DecorationNode" xmi:id="_GVAQY1MbEeiLvc-boIS_pw" type="6002">
+      <layoutConstraint xmi:type="notation:Location" xmi:id="_GVAQZFMbEeiLvc-boIS_pw" y="40"/>
+    </children>
+    <styles xmi:type="notation:FontStyle" xmi:id="_GVAQYVMbEeiLvc-boIS_pw" fontName="Segoe UI"/>
+    <element xmi:type="idemia:Perception" href="default.idemia#//@Perceptions.2"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_GVAQYlMbEeiLvc-boIS_pw" points="[-14, -1, 204, 2]$[-178, -70, 40, -67]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GVKocFMbEeiLvc-boIS_pw" id="(0.04430379746835443,0.1185064935064935)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_GVKocVMbEeiLvc-boIS_pw" id="(0.8936170212765957,0.1109350237717908)"/>
+  </edges>
+</notation:Diagram>

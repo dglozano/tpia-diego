@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idemia:AgentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:idemia="utn.frsf.cidisi">
+  <Environment name="AmbienteCarToy">
+    <EnvironmentState name="EstadoAmbiente">
+      <DataStructure name="planoCasa" type="matrix"/>
+      <DataStructure name="Boy" type="Other"/>
+      <DataStructure name="listaEventos" type="Other"/>
+      <DataStructure name="posicionAgente"/>
+    </EnvironmentState>
+  </Environment>
+  <Agent name="CarToy">
+    <Strategy xsi:type="idemia:Search"/>
+    <Goal name="ObjetivoCarToy" value="posicionAgente.equals(Boy.getPosicion)"/>
+    <AgentState name="EstadoCarToy">
+      <DataStructure name="planoCasaDescubierto" type="matrix"/>
+      <DataStructure name="posicionAgente" type="pair"/>
+      <DataStructure name="listaEventos" type="Other"/>
+      <DataStructure name="habitacionBoy" type="Other"/>
+      <DataStructure name="habitacionAgente" type="Other"/>
+    </AgentState>
+  </Agent>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrN"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrS"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrO"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="IrE"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="habitacionboy"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="listaeventos"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="infoalrededores"/>
+</idemia:AgentModel>
