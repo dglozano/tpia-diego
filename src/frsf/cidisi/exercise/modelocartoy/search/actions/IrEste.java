@@ -10,6 +10,8 @@ import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 public class IrEste extends SearchAction {
+	
+	private double costo = 1.0;
 
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
@@ -24,6 +26,8 @@ public class IrEste extends SearchAction {
 			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
 				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
 				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
+				this.costo = posAgente.getCosto() * 0.5 + agState.getCasa().getCelda(x_next,y_next).getCosto() * 0.5;
+				agState.incrementarCosto(this.costo);
 				return agState;	
 			}
 		}
@@ -33,13 +37,12 @@ public class IrEste extends SearchAction {
 
 	@Override
 	public Double getCost() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.costo;
 	}
 
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-		// TODO Auto-generated method stub
+
 		EstadoAmbiente environmentState = (EstadoAmbiente) est;
 		EstadoCarToy agState = (EstadoCarToy) ast;
 		

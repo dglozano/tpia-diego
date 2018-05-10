@@ -20,10 +20,12 @@ public class IrNoroeste extends SearchAction {
 		int y_next = posAgente.getY() - 1;
 				
 		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next)))
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));			
-			return agState;
+			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
+			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
+				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
+				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
+				return agState;	
+			}
 		}
 		
 		return null;
@@ -46,11 +48,13 @@ public class IrNoroeste extends SearchAction {
 		int y_next = posAgente.getY() - 1;
 				
 		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next)))
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));			
-			environmentState.setPosicionAgente(x_next, y_next);
-			return environmentState;
+			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
+			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
+				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
+				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
+				environmentState.setPosicionAgente(x_next,y_next);
+				return environmentState;
+			}
 		}
 		
 		

@@ -73,6 +73,10 @@ public class EstadoCarToy extends SearchBasedAgentState {
     		newCeldasVisitadas.add(c.clone());
     	}
     	
+    	estadoClone.setCeldasDescubiertas(newCeldasDescubiertas);
+    	estadoClone.setCeldasVisitadas(newCeldasVisitadas);
+
+    	
     	estadoClone.costo = this.costo;
   		
         return estadoClone;
@@ -134,8 +138,10 @@ public class EstadoCarToy extends SearchBasedAgentState {
        EstadoCarToy estadoComparado = (EstadoCarToy) obj;
        
        // Comparo que esten en la misma posicion
-       boolean mismaPosicion = estadoComparado.getPosicionCarToy().equals(this.getPosicionCarToy());
-
+       boolean mismaPosicion;// = estadoComparado.getPosicionCarToy().equals(this.getPosicionCarToy());
+       mismaPosicion = estadoComparado.getPosicionCarToy().getX() == this.getPosicionCarToy().getX() &&
+       estadoComparado.getPosicionCarToy().getY() == this.getPosicionCarToy().getY();
+       
        /*
        // Comparo que tengan las mismas visitadas y descubiertas
        boolean mismasCeldasVisitadas = true;

@@ -25,6 +25,8 @@ public class Matriz {
 				for (int i = 0; i<values.length; i++) {
 					//llama a crearCelda con el caracter de esa posición del mapa como parámetro
 					Celda celda = crearCelda(values[i].charAt(0));
+					celda.setX(fila);
+					celda.setY(i);
 					plano[fila][i] = celda;
 				}
 				fila++;

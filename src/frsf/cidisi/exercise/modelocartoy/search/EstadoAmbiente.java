@@ -44,9 +44,6 @@ public class EstadoAmbiente extends EnvironmentState {
         
         return str;
     }
-
-	//TODO: Complete this section with agent-specific methods
-    // The following methods are agent-specific:
 	
      public Casa getCasa(){
         return this.casa;

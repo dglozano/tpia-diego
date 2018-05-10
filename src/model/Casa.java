@@ -3,18 +3,21 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Matriz;
+
 
 public class Casa {
 	
-	public static final int X_CELLS = 10;
-	public static final int Y_CELLS = 10;
+	public static final int X_CELLS = 60;
+	public static final int Y_CELLS = 32;
 	
     private Celda[][] plano = new Celda[X_CELLS][Y_CELLS];
     private Celda posicionAgente;
     private Celda posicionBoy;
     
 	public Casa() {
-		this.Crear();
+		//this.Crear();
+		plano = Matriz.crearMatrizDesdeArchivo("mapa.txt");
 	}
 
 	// FIXME: Plano casa ejemplo, borrar luego
