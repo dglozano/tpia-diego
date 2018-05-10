@@ -3,17 +3,16 @@ package model;
 public class Celda {
 
     private TipoSuelo tipoSuelo;
-    private Double costo;
-    private boolean descubierta;
+    private int x;
+    private int y;
+    private double costo;
     
     public Celda(){
-    	
+    	this.tipoSuelo = TipoSuelo.COMUN;
     }
     
     public Celda(TipoSuelo tipoSuelo, Double costo){
     	this.tipoSuelo = tipoSuelo;
-    	this.costo = costo;
-    	this.descubierta = false;
     }
     
 	public TipoSuelo getTipoSuelo() {
@@ -23,25 +22,24 @@ public class Celda {
 	public void setTipoSuelo(TipoSuelo tipoSuelo) {
 		this.tipoSuelo = tipoSuelo;
 	}
-
-	public void setCosto(Double costo) {
-		this.costo = costo;
-	}
-
-	public Double getCosto() {
-		return costo;
-	}
-
-	public void setDescubierta(boolean descubierta) {
-		this.descubierta = descubierta;
-	}
-
-	public boolean isDescubierta() {
-		return descubierta;
+	
+	public Celda clone(){
+		Celda celdaClone = new Celda();
+		
+		celdaClone.x = this.x;
+		celdaClone.y = this.y;
+		celdaClone.tipoSuelo = this.tipoSuelo;
+		celdaClone.costo = this.costo;
+		
+		return celdaClone;
 	}
 	
 	@Override
-	public String toString(){
+	public boolean equals(Object c){
+		return ((Celda) c).getX() == this.getX() && this.getY() == ((Celda) c).getY();
+	}
+	
+	public String getChar(){
 		String str = "";
 		switch(this.tipoSuelo){
 			case COMUN:
@@ -69,5 +67,41 @@ public class Celda {
 				str = "?";
 		}
 		return str;
+	}
+	
+	@Override
+	public String toString(){
+		return "<" + this.x + "," + this.y + "> " + this.getChar();
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
+	}
+
+	public int getY() {
+		return y;
+	}
+	
+	public boolean esAccisble(){
+		TipoSuelo ts = this.getTipoSuelo();
+		return ts != TipoSuelo.PARED &&
+				ts != TipoSuelo.OBSTACULO &&
+				ts != TipoSuelo.PUERTA_CERRADA;
+	}
+
+	public void setCosto(double costo) {
+		this.costo = costo;
+	}
+
+	public double getCosto() {
+		return costo;
 	}
 }

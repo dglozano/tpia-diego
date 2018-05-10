@@ -1,12 +1,7 @@
 package frsf.cidisi.exercise.modelocartoy.search;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import model.Celda;
-import model.Evento;
-import model.PlanoCasa;
-import model.PosicionBoy;
+import model.Casa;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 /**
@@ -14,17 +9,16 @@ import frsf.cidisi.faia.state.EnvironmentState;
  */
 public class EstadoAmbiente extends EnvironmentState {
 	
-    private PlanoCasa planoCasa;
+    private Casa casa;
+    
     private Celda posicionCarToy;
-    private List<Evento> listaEventos;
-    private PosicionBoy posicionBoy;
+    private Celda posicionBoy;
 	
-    public EstadoAmbiente() {
+	public EstadoAmbiente(Casa casa) {
         
-        planoCasa = new PlanoCasa();
-        posicionCarToy = new Celda();
-        listaEventos = new ArrayList<Evento>();
-        posicionBoy = new PosicionBoy();
+        this.casa = casa;
+        this.posicionBoy = new Celda();
+        this.posicionCarToy = new Celda();
         this.initState();
     }
 
@@ -33,12 +27,8 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-
-    	// TODO: Cargar Plano Casa con funcion martinez
-    	// TODO: generar obstaculos
-    	// TODO: generar posicion al azar de agente
-    	// TODO: generar posicion al azar de boy
-    	// TODO: generar lista de ventos al azar en la misma habitacion que boy
+    	this.posicionBoy = casa.getPosicionBoy();
+    	this.posicionCarToy = casa.getPosicionAgente();
     }
 
     /**
@@ -49,44 +39,46 @@ public class EstadoAmbiente extends EnvironmentState {
         String str = "";
 
         str += "Estado del ambiente: \n";
+		
+        str += this.casa.toString();
         
-        str += "Plano Casa \n \n";
-        
-        //TODO: print planoCasa;
-        	
-        	
-
         return str;
     }
 
 	//TODO: Complete this section with agent-specific methods
     // The following methods are agent-specific:
 	
-     public int[][] getplanoCasa(){
-        return planoCasa;
+     public Casa getCasa(){
+        return this.casa;
      }
-     public void setplanoCasa(int[][] arg){
-        planoCasa = arg;
+     public void setplanoCasa(Casa arg){
+        this.casa = arg;
      }
-//     public Other getBoy(){
-//        return Boy;
-//     }
-//     public void setBoy(Other arg){
-//        Boy = arg;
-//     }
-//     public Other getlistaEventos(){
-//        return listaEventos;
-//     }
-//     public void setlistaEventos(Other arg){
-//        listaEventos = arg;
-//     }
-     public int getposicionAgente(){
-        return posicionAgente;
+     
+     public Celda getPosicionAgente(){
+        return this.posicionCarToy;
      }
-     public void setposicionAgente(int arg){
-        posicionAgente = arg;
+     
+     public void setPosicionAgente(Celda arg){
+        this.posicionCarToy = arg;
      }
 	
+     public Celda getPosicionBoy() {
+ 		return posicionBoy;
+ 	}
 
+ 	public void setPosicionBoy(Celda posicionBoy) {
+ 		this.posicionBoy = posicionBoy;
+ 	}
+ 	
+ 	public void setPosicionAgente(int x, int y){
+ 		this.casa.setPosicionAgente(x, y);
+ 		this.posicionCarToy = this.casa.getPosicionAgente();
+ 	}
+
+ 	public void setPosicionBoy(int x, int y){
+ 		this.casa.setPosicionBoy(x, y);
+ 		this.posicionBoy = this.casa.getPosicionBoy();
+ 	}
 }
 

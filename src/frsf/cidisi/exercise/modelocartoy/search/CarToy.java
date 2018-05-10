@@ -8,19 +8,22 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.solver.search.*;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.Vector;
 
+import model.Casa;
+
 public class CarToy extends SearchBasedAgent {
 
-    public CarToy() {
+    public CarToy(Casa casa) {
 
         // The Agent Goal
         ObjetivoCarToy agGoal = new ObjetivoCarToy();
 
         // The Agent State
-        EstadoCarToy agState = new EstadoCarToy();
+        EstadoCarToy agState = new EstadoCarToy(casa);
         this.setAgentState(agState);
 
         // Create the operators
@@ -29,10 +32,10 @@ public class CarToy extends SearchBasedAgent {
         operators.addElement(new IrOeste());
         operators.addElement(new IrSur());
         operators.addElement(new IrEste());
-        operators.addElement(new IrNoreste());
+        /*operators.addElement(new IrNoreste());
         operators.addElement(new IrNoroeste());
         operators.addElement(new IrSureste());
-        operators.addElement(new IrSuroeste());
+        operators.addElement(new IrSuroeste());*/
         
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);
@@ -46,7 +49,7 @@ public class CarToy extends SearchBasedAgent {
     public Action selectAction() {
 
         // Create the search strategy
-        DepthFirstSearch strategy = new DepthFirstSearch();          
+    	DepthFirstSearch strategy = new DepthFirstSearch();          
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);

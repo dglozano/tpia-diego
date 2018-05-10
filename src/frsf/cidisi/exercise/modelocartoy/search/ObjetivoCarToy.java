@@ -9,9 +9,8 @@ public class ObjetivoCarToy extends GoalTest {
 
     @Override
     public boolean isGoalState (AgentState agentState) {
-    
-    	// TODO: Complete Method
-        if  (true) //(posicionAgente.equals(Boy.getPosicion))
+    	EstadoCarToy estado = (EstadoCarToy) agentState;
+        if  (estado.getPosicionCarToy().equals(estado.getPosicionBoy())) //(posicionAgente.equals(Boy.getPosicion))
         	{
             return true;
         	}

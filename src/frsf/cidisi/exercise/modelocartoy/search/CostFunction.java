@@ -14,9 +14,8 @@ public class CostFunction implements IStepCostFunction {
      */
     @Override
     public double calculateCost(NTree node) {
-        
-        //TODO: Complete Method
-        
-        return 0;
+        //node posee como atributo el estado, el cuál tiene el costo asociado
+    	//el costo del agente se va incrementando en cada acción que ejecuta   
+        return ((EstadoCarToy)node.getAgentState()).getCosto();
     }
 }
