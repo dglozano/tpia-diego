@@ -23,7 +23,8 @@ public class IrEste extends SearchAction {
 				
 		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
 			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
+			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))
+					&& agState.getCeldasDescubiertas().contains(agState.getCasa().getCelda(x_next, y_next))){
 				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
 				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
 				this.costo = posAgente.getCosto() * 0.5 + agState.getCasa().getCelda(x_next,y_next).getCosto() * 0.5;
@@ -51,8 +52,9 @@ public class IrEste extends SearchAction {
 		int y_next = posAgente.getY() + 1;
 				
 		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
+			//si esta descubierta y no visitada
+			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))
+					&& agState.getCeldasDescubiertas().contains(agState.getCasa().getCelda(x_next, y_next))){
 				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
 				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
 				environmentState.setPosicionAgente(x_next,y_next);
