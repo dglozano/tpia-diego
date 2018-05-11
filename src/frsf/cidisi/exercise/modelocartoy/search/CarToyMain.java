@@ -9,8 +9,8 @@ public class CarToyMain {
     public static void main(String[] args) throws PrologConnectorException {
         Casa casa = new Casa();
         
-        casa.setPosicionAgente(3,3);
-        casa.setPosicionBoy(1,25);
+        casa.setPosicionAgente(2,3);
+        casa.setPosicionBoy(6,9);
         
         CarToy agent = new CarToy(casa);
         
