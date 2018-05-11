@@ -32,10 +32,10 @@ public class CarToy extends SearchBasedAgent {
         operators.addElement(new IrOeste());
         operators.addElement(new IrSur());
         operators.addElement(new IrEste());
-        /*operators.addElement(new IrNoreste());
-        operators.addElement(new IrNoroeste());
-        operators.addElement(new IrSureste());
-        operators.addElement(new IrSuroeste());*/
+        operators.addElement(new IrNoreste());
+        //operators.addElement(new IrNoroeste());
+        //operators.addElement(new IrSureste());
+        operators.addElement(new IrSuroeste());
         
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);
