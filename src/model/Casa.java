@@ -8,8 +8,8 @@ import utils.Matriz;
 
 public class Casa {
 	
-	public static final int X_CELLS = 60;
-	public static final int Y_CELLS = 32;
+	public static final int X_CELLS = 13;
+	public static final int Y_CELLS = 18;
 	
     private Celda[][] plano = new Celda[X_CELLS][Y_CELLS];
     private Celda posicionAgente;
@@ -17,7 +17,7 @@ public class Casa {
     
 	public Casa() {
 		//this.Crear();
-		plano = Matriz.crearMatrizDesdeArchivo("mapa.txt");
+		plano = Matriz.crearMatrizDesdeArchivo("mapa-chico.txt");
 	}
 
 	// FIXME: Plano casa ejemplo, borrar luego
