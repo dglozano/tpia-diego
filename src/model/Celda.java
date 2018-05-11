@@ -6,6 +6,8 @@ public class Celda {
     private int x;
     private int y;
     private double costo;
+    private int visitas;
+    private boolean descubierta;
     
     public Celda(){
     	this.tipoSuelo = TipoSuelo.COMUN;
@@ -28,6 +30,8 @@ public class Celda {
 		
 		celdaClone.x = this.x;
 		celdaClone.y = this.y;
+		celdaClone.visitas = this.visitas;
+		celdaClone.descubierta = this.descubierta;
 		celdaClone.tipoSuelo = this.tipoSuelo;
 		celdaClone.costo = this.costo;
 		
@@ -103,5 +107,25 @@ public class Celda {
 
 	public double getCosto() {
 		return costo;
+	}
+
+	public int getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(int visitas) {
+		this.visitas = visitas;
+	}
+
+	public void incrementarVisitas() {
+		this.visitas = this.visitas + 1;
+	}
+	
+	public boolean isDescubierta() {
+		return descubierta;
+	}
+
+	public void setDescubierta(boolean descubierta) {
+		this.descubierta = descubierta;
 	}
 }

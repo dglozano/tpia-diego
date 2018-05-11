@@ -11,19 +11,29 @@ import model.TipoSuelo;
 
 public class Matriz {
 	
-	private static Celda[][] plano = new Celda[82][50];
-
+	private static int X_SIZE;
+	private static int Y_SIZE;
+	
 	public static Celda[][] crearMatrizDesdeArchivo(String ruta){
+		Celda[][] plano = null;
 		try {
 			BufferedReader br = getBuffered(ruta);
-			//lee el primer renglón del archivo
-			String linea =  br.readLine();
+			//lee el primer renglon y segundo renglon del archivo, donde esta el tamaÃ±o de la matriz
+			String lineaFilas =  br.readLine();
+			String lineaColumnas = br.readLine();
+			X_SIZE = Integer.parseInt(lineaFilas);
+			Y_SIZE = Integer.parseInt(lineaColumnas);
+			
+			plano = new Celda[X_SIZE][Y_SIZE];
+			
+			//leo el resto
 			int fila = 0;
+			String linea = br.readLine();
 			while(linea != null){
-				//crea un arreglo con los caracteres del renglón separados por |
+				//crea un arreglo con los caracteres del renglï¿½n separados por |
 				String[] values = linea.split(Pattern.quote("|"));
 				for (int i = 0; i<values.length; i++) {
-					//llama a crearCelda con el caracter de esa posición del mapa como parámetro
+					//llama a crearCelda con el caracter de esa posiciï¿½n del mapa como parï¿½metro
 					Celda celda = crearCelda(values[i].charAt(0));
 					celda.setX(fila);
 					celda.setY(i);
@@ -129,9 +139,9 @@ public class Matriz {
 
 		celda.setTipoSuelo(suelo);
 		celda.setCosto(costo);
+		celda.setVisitas(0);
+		celda.setDescubierta(false);
 
 		return celda;
 	}
-
-
 }

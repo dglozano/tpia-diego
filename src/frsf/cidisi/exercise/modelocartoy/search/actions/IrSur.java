@@ -20,14 +20,15 @@ public class IrSur extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX() + 1;
 		int y_next = posAgente.getY();
-				
-		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))
-					&& agState.getCeldasDescubiertas().contains(agState.getCasa().getCelda(x_next, y_next))){
-				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
-				this.costo = posAgente.getCosto() * 0.5 + agState.getCasa().getCelda(x_next,y_next).getCosto() * 0.5;
+
+		//si la siguiente celda no se va del mapa
+		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
+			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
+			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
+				agState.setPosicionCarToy(siguiente);
+				siguiente.incrementarVisitas();
+				this.costo = posAgente.getCosto() * 0.5 + siguiente.getCosto() * 0.5;
 				agState.incrementarCosto(this.costo);
 				return agState;	
 			}
@@ -49,12 +50,14 @@ public class IrSur extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX() + 1;
 		int y_next = posAgente.getY();
-				
-		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
-				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
+
+		//si la siguiente celda no se va del mapa
+		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
+			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
+			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
+				agState.setPosicionCarToy(siguiente);
+				siguiente.incrementarVisitas();
 				environmentState.setPosicionAgente(x_next,y_next);
 				return environmentState;
 			}
@@ -68,5 +71,5 @@ public class IrSur extends SearchAction {
 	public String toString() {
 		return "-> Ir Sur";
 	}
-
+	
 }
