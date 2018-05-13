@@ -25,7 +25,7 @@ import javax.swing.WindowConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import model.Casa;
-
+import model.Celda;
 import frsf.cidisi.exercise.modelocartoy.search.AmbienteCarToy;
 import frsf.cidisi.exercise.modelocartoy.search.CarToy;
 import frsf.cidisi.exercise.modelocartoy.search.CarToyMain;
@@ -54,10 +54,19 @@ public class PrincipalNueva extends javax.swing.JFrame {
     private JMenuItem itemCargarTab = new JMenuItem();
     private JMenuItem itemSalir = new JMenuItem();
     JFileChooser f = new JFileChooser();
+    
+    private static PrincipalNueva instancia;
 
-    public PrincipalNueva() {
+    private PrincipalNueva() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
+    }
+    
+    public static PrincipalNueva getInstancia() {
+    	if(instancia == null) {
+    		instancia = new PrincipalNueva();
+    	}
+    	return instancia;
     }
     
     public void actualizarTablero(char[][] nuevoPlano){
@@ -66,7 +75,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
     	jPanelMapa.removeAll();
     	int anchoPanel = jPanelMapa.getWidth();
     	int altoPanel =jPanelMapa.getHeight();
-    	TableroGUI tableroGUI = new TableroGUI(plano, this, anchoPanel, altoPanel-40);
+    	TableroGUI tableroGUI = new TableroGUI(nuevoPlano, this, anchoPanel, altoPanel-40);
         tablero = tableroGUI;
         GroupLayout tableroGUI1Layout = new GroupLayout(tableroGUI);
         tableroGUI.setLayout(tableroGUI1Layout);
@@ -165,7 +174,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
         buttonGroup1.add(jRbNinio);
         jRbNinio.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        jRbNinio.setText("Niño/a");
+        jRbNinio.setText("Niï¿½o/a");
         jRbNinio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRbNinioActionPerformed(evt);
@@ -210,7 +219,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
         jPanelEstrategia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccionar Estrategia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 3, 12))); // NOI18N
 
         cbEstrategia.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estrategia de Búsqueda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
+        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estrategia de Bï¿½squeda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
         cbEstrategia.setToolTipText("");
         cbEstrategia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbEstrategia.addActionListener(new java.awt.event.ActionListener() {
@@ -308,18 +317,23 @@ public class PrincipalNueva extends javax.swing.JFrame {
     }                                            
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO desde acá hay que enviar las posiciones del agente y del niño, y la estrategia de búsqueda (con "cbEstrategia.getSelectedItem()");
+        // TODO desde acï¿½ hay que enviar las posiciones del agente y del niï¿½o, y la estrategia de bï¿½squeda (con "cbEstrategia.getSelectedItem()");
     	if (jLabelPosAgente.getText()=="Inaccesible" || jLabelPosAgente.getText()=="(-- ; --)" || jLabelPosNinio.getText()=="Inaccesible" || jLabelPosNinio.getText()=="(-- ; --)"){
-    		JOptionPane.showMessageDialog(null, "Seleccione posiciones válidas para el juguete y el niño.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione posiciones vï¿½lidas para el juguete y el niï¿½o.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else if (cbEstrategia.getSelectedIndex()==0){
-    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de búsqueda.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de bï¿½squeda.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else{
-            int cantFilas = plano.length;
-            int cantCol = plano[0].length;
-    		CarToy agent = new CarToy();
-            AmbienteCarToy environment = new AmbienteCarToy();
-            SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(environment, agent);
-            simulator.start();	
+    		 // Runs outside of the Swing UI thread
+    	    new Thread(new Runnable() {
+    	      public void run() {
+    	    	  int cantFilas = plano.length;
+    	            int cantCol = plano[0].length;
+    	    		CarToy agent = new CarToy();
+    	            AmbienteCarToy environment = new AmbienteCarToy();
+    	            SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(environment, agent);
+    	            simulator.start();	
+    	        }
+    	      }).start();
     	}
     }                                           
 
@@ -400,7 +414,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
                 	plano = CreaMatriz.matrizDesdeArchivo(f.getSelectedFile());
                 	crearTablero();
                 } catch (Exception x) {
-                    JOptionPane.showMessageDialog(null, "Archivo no válido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Archivo no vï¿½lido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }        
@@ -441,7 +455,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PrincipalNueva().setVisible(true);
+                PrincipalNueva.getInstancia().setVisible(true);
             }
         });
     }

@@ -10,7 +10,7 @@ public class ObjetivoCarToy extends GoalTest {
     @Override
     public boolean isGoalState (AgentState agentState) {
     	EstadoCarToy estado = (EstadoCarToy) agentState;
-        if  (estado.getPosicionCarToy().equals(estado.getPosicionBoy())) //(posicionAgente.equals(Boy.getPosicion))
+        if  (estado.getPosicionCarToy().equals(estado.getPosicionBoy()))
         	{
             return true;
         	}

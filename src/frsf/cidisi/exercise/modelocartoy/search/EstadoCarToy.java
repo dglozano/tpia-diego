@@ -23,8 +23,8 @@ public class EstadoCarToy extends SearchBasedAgentState {
 	
 	//Primero va a la llamada. Si no lo encuentra antes y no esta alli, sigue yendo
 	//a la posicion de cada evento. Si no lo encontro en ninguno de ellos, falla.
-	//private Celda posicionLlamada;
-	//private List<Celda> eventosCercanos;
+	private Celda posicionLlamada;
+	private List<Celda> eventosCercanos;
     
     private double costo;
 	

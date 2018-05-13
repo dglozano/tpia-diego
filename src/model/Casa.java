@@ -90,5 +90,24 @@ public class Casa {
 		
 		return false;
 	}
+	
+	public char[][] getPlanoChars(){
+		char[][] planoChars = new char[this.X_CELLS][this.Y_CELLS];
+		for(int i = 0; i < this.X_CELLS; i++) {
+			for(int j=0; j<this.Y_CELLS; j++) {
+				planoChars[i][j] = this.getCelda(i, j).getChar();
+			}
+		}
+		return planoChars;
+	}
+	
+	public static Casa convertirASinDescubrir(Casa casa) {
+		Casa casaSinDescubrir = new Casa(casa.X_CELLS, casa.Y_CELLS);
+		for(int i = 0; i < casa.X_CELLS; i++) {
+			for(int j=0; j< casa.Y_CELLS; j++) {
+				planoChars[i][j] = this.getCelda(i, j).getChar();
+			}
+		}
+	}
 }
 

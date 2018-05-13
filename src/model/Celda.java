@@ -41,58 +41,58 @@ public class Celda {
 		return ((Celda) c).getX() == this.getX() && this.getY() == ((Celda) c).getY();
 	}
 	
-	public String getChar(){
-		String str = "";
+	public char getChar(){
+		char chr;
 		switch(this.tipoSuelo){
 			case COMUN:
-				str = "_";
+				chr = '_';
 				break;
 			case PARED:
-				str = "#";
+				chr = '#';
 				break;
 			case PUERTA_ABIERTA:
-				str = "a";
+				chr = 'a';
 				break;
 			case PUERTA_CERRADA:
-				str = "c";
+				chr = 'c';
 				break;
 			case OBSTACULO:
-				str = "$";
+				chr = '$';
 				break;
 			case PASTO:
-				str = "~";
+				chr = '~';
 				break;
 			case ALFOMBRA:
-				str = "\'";
+				chr = '\'';
 				break;
 			case AGUA:
-				str = "!";
+				chr = '!';
 				break;
 			case ARENA:
-				str = "%";
+				chr = '%';
 				break;
 			case BASURA:
-				str = "*";
+				chr = '*';
 				break;
 			case ROPA:
-				str = "&";
+				chr = '&';
 				break;
 			case ESCALERA_N:
-				str = "N";
+				chr = 'N';
 				break;
 			case ESCALERA_O:
-				str = "O";
+				chr = 'O';
 				break;
 			case ESCALERA_S:
-				str = "S";
+				chr = 'S';
 				break;
 			case ESCALERA_E:
-				str = "E";
+				chr = 'E';
 				break;
 			default:
-				str = "?";
+				chr = '?';
 		}
-		return str;
+		return chr;
 	}
 	
 	@Override

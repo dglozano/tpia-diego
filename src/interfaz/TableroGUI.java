@@ -100,7 +100,7 @@ public class TableroGUI extends javax.swing.JPanel {
 		case 'B':
 			imagen=ninio;
 			break;
-		case 'X':
+		case 'x':
 			imagen=oculto;
 			break;
 
