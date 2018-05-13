@@ -108,9 +108,15 @@ public class Casa {
 		Casa casaSinDescubrir = new Casa(casa.X_CELLS, casa.Y_CELLS);
 		for(int i = 0; i < casa.X_CELLS; i++) {
 			for(int j=0; j< casa.Y_CELLS; j++) {
-				planoChars[i][j] = this.getCelda(i, j).getChar();
+				casaSinDescubrir.getPlano()[i][j] = casa.getCelda(i, j).clone();
+				if(casa.getCelda(i, j).getTipoSuelo() == TipoSuelo.PUERTA_CERRADA) {
+					casaSinDescubrir.getPlano()[i][j].setTipoSuelo(TipoSuelo.PUERTA_ABIERTA);
+				} else if(casa.getCelda(i, j).getTipoSuelo() != TipoSuelo.PARED) {
+					casaSinDescubrir.getCelda(i,j).setTipoSuelo(TipoSuelo.COMUN);
+				}
 			}
 		}
+		return casaSinDescubrir;
 	}
 }
 
