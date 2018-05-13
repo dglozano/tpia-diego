@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.swing.SwingUtilities;
+
 import model.Celda;
 import model.Casa;
 import model.TipoSuelo;
 import utils.Matriz;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+import interfaz.PrincipalNueva;
 
 /**
  * Represent the internal state of the Agent.
@@ -92,6 +95,21 @@ public class EstadoCarToy extends SearchBasedAgentState {
     		celdaVecinaActual.setDescubierta(true);
     		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
     	}
+    	
+    	final EstadoCarToy  agState = this;
+    	
+		SwingUtilities.invokeLater(new Runnable() {
+		    public void run() {
+		    	int x_ag = agState.getPosicionCarToy().getX();
+		    	int y_ag = agState.getPosicionCarToy().getY();
+		    	int x_ch = agState.getPosicionBoy().getX();
+		    	int y_ch = agState.getPosicionBoy().getY();
+		    	char[][] casaDisplay = agState.getCasa().getPlanoChars();
+		    	casaDisplay[x_ag][y_ag] = 'A';
+		    	casaDisplay[x_ch][y_ch] = 'B';
+				PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
+		    }
+		});
     }
 
     /**

@@ -96,6 +96,9 @@ public class Casa {
 		for(int i = 0; i < this.X_CELLS; i++) {
 			for(int j=0; j<this.Y_CELLS; j++) {
 				planoChars[i][j] = this.getCelda(i, j).getChar();
+				if(!plano[i][j].isDescubierta()) {
+					planoChars[i][j] = 'x';
+				}
 			}
 		}
 		return planoChars;

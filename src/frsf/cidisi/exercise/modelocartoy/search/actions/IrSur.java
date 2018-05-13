@@ -78,7 +78,7 @@ public class IrSur extends SearchAction {
 				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
 				agState.incrementarCosto(this.costo);
 				environmentState.setPosicionAgente(x_next,y_next);
-				
+				/*
 				SwingUtilities.invokeLater(new Runnable() {
 				    public void run() {
 				    	int x_ag = agState.getPosicionCarToy().getX();
@@ -90,7 +90,7 @@ public class IrSur extends SearchAction {
 				    	casaDisplay[x_ch][y_ch] = 'B';
 						PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
 				    }
-				});
+				});*/
 								
 				return environmentState;
 			}

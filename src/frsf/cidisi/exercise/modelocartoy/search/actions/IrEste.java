@@ -80,7 +80,7 @@ public class IrEste extends SearchAction {
 				agState.incrementarCosto(this.costo);
 				
 				environmentState.setPosicionAgente(x_next,y_next);
-				
+				/*
 				SwingUtilities.invokeLater(new Runnable() {
 				    public void run() {
 				    	int x_ag = agState.getPosicionCarToy().getX();
@@ -92,7 +92,7 @@ public class IrEste extends SearchAction {
 				    	casaDisplay[x_ch][y_ch] = 'B';
 						PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
 				    }
-				});
+				});*/
 				
 				return environmentState;
 			}
