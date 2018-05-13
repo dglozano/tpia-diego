@@ -9,28 +9,37 @@ import model.Celda;
 
 
 public class CreaMatriz {
+	
+	private static int X_SIZE;
+	private static int Y_SIZE;
 
 	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 	}
 		
-	 public static char[][] matrizDesdeArchivo(String ruta){
+	 public static char[][] matrizDesdeArchivo(File fileMapa){
+		 char[][] matriz; 
 		    try {
-		        BufferedReader br = getBuffered(ruta);
-		        //leemos la primera linea
-		        String linea =  br.readLine();
-		        //creamos la matriz vacia
-		        char[][] matriz = new char[13][18];
-		        int contador = 0;
+		        BufferedReader br = getBuffered(fileMapa);
+				//lee el primer renglon y segundo renglon del archivo, donde esta el tamanio de la matriz
+				String lineaFilas =  br.readLine();
+				String lineaColumnas = br.readLine();
+				X_SIZE = Integer.parseInt(lineaFilas);
+				Y_SIZE = Integer.parseInt(lineaColumnas);
+				
+				matriz = new char[X_SIZE][Y_SIZE];
+				
+				//leo el resto
+				int fila = 0;
+				String linea = br.readLine();
 		        while(linea != null){
 		            String[] values = linea.split(Pattern.quote("|"));
 		            //recorremos el array de string
 		            for (int i = 0; i<values.length; i++) {
 		                //se obtiene el primer caracter de el arreglo de strings
-		            	matriz[contador][i] = values[i].charAt(0);
+		            	matriz[fila][i] = values[i].charAt(0);
 		            }
-		            contador++;
+		            fila++;
 		            linea = br.readLine();
 		        }
 				return matriz;
@@ -40,16 +49,16 @@ public class CreaMatriz {
 			return null;
 		}
 	
-	public static BufferedReader getBuffered(String link){
+	public static BufferedReader getBuffered(File fileMapa){
 
 	    FileReader lector  = null;
 	    BufferedReader br = null;
 	    try {
-	         File Arch=new File(link);
+	         File Arch= fileMapa;
 	         if(!Arch.exists()){
 	           System.out.println("No existe el archivo");
 	         }else{
-	           lector = new FileReader(link);
+	           lector = new FileReader(fileMapa);
 	           br = new BufferedReader(lector);
 	         }
 	    } catch (Exception e) {

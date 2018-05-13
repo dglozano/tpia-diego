@@ -18,7 +18,7 @@ public class Matriz {
 		Celda[][] plano = null;
 		try {
 			BufferedReader br = getBuffered(ruta);
-			//lee el primer renglon y segundo renglon del archivo, donde esta el tamaño de la matriz
+			//lee el primer renglon y segundo renglon del archivo, donde esta el tamanio de la matriz
 			String lineaFilas =  br.readLine();
 			String lineaColumnas = br.readLine();
 			X_SIZE = Integer.parseInt(lineaFilas);
@@ -30,10 +30,10 @@ public class Matriz {
 			int fila = 0;
 			String linea = br.readLine();
 			while(linea != null){
-				//crea un arreglo con los caracteres del rengl�n separados por |
+				//crea un arreglo con los caracteres del renglon separados por |
 				String[] values = linea.split(Pattern.quote("|"));
 				for (int i = 0; i<values.length; i++) {
-					//llama a crearCelda con el caracter de esa posici�n del mapa como par�metro
+					//llama a crearCelda con el caracter de esa posicion del mapa como parametro
 					Celda celda = crearCelda(values[i].charAt(0));
 					celda.setX(fila);
 					celda.setY(i);

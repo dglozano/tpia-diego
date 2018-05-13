@@ -6,18 +6,18 @@ import javax.swing.*;
 public class CasillasGUI extends javax.swing.JPanel implements MouseListener {
     
     private TableroGUI tablero;
+    private PrincipalNueva pantallaPrincipal;
     private ImageIcon fondo;
-    private static int [] casillaMarcada = new int[2];
+    private boolean accesible;
     
-    public CasillasGUI() {      
-    }
+//    public CasillasGUI() {      
+//    }
     
-    public CasillasGUI(TableroGUI t) {
+    public CasillasGUI(TableroGUI t, PrincipalNueva principalNueva) {
         initComponents();        
         this.tablero = t;
-        if(this.tablero.getTipoTablero() == true){
-            this.addMouseListener(this);
-        }
+        this.pantallaPrincipal = principalNueva;
+        this.addMouseListener(this);
     }
     
     public void setFondo(ImageIcon fondo){
@@ -50,17 +50,21 @@ public class CasillasGUI extends javax.swing.JPanel implements MouseListener {
     public void mouseClicked(MouseEvent e){}
     public void mouseEntered(MouseEvent e){}
     public void mouseExited(MouseEvent e){}
-    public void mousePressed(MouseEvent e){
-            this.setCasillaMarcada(tablero.getCoordenadas((CasillasGUI)e.getComponent())); 
-//            this.tablero.pintar(this.getCasillaMarcada()[0],this.getCasillaMarcada()[1]);
-    }
+
+	public void mousePressed(MouseEvent e) {
+		if (this.getAccesible()) {
+			pantallaPrincipal.setearPosicion(tablero.getCoordenadas((CasillasGUI) e.getComponent()));
+		} else {
+			pantallaPrincipal.mensajeCasillaInaccesible(tablero.getCoordenadas((CasillasGUI) e.getComponent()));
+		}
+	}
     public void mouseReleased(MouseEvent e){}
     
-    public static int[] getCasillaMarcada() {
-        return casillaMarcada;
+    public boolean getAccesible() {
+        return accesible;
     }
-    public static void setCasillaMarcada(int[] aCasillaMarcada) {
-        casillaMarcada = aCasillaMarcada;
-    }                  
+    public void setAccesible(boolean bool) {
+        accesible = bool;
+    }                     
     
 }
