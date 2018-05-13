@@ -20,12 +20,18 @@ public class EstadoCarToy extends SearchBasedAgentState {
     
     private Celda posicionCarToy;
 	private Celda posicionBoy;
+	
+	//Primero va a la llamada. Si no lo encuentra antes y no esta alli, sigue yendo
+	//a la posicion de cada evento. Si no lo encontro en ninguno de ellos, falla.
+	//private Celda posicionLlamada;
+	//private List<Celda> eventosCercanos;
     
     private double costo;
 	
     public EstadoCarToy() {
     
         this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico-sin-descubrir.txt"));
+        //this.eventosCercanos = new ArrayList<Celda>();
         this.initState();
     }
     
@@ -37,12 +43,17 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-    	int x_boy = 8, y_boy = 6;
-    	int x_agente = 1, y_agente = 1;
+    	int x_boy = 1, y_boy = 1;
+    	int x_agente = 14, y_agente = 9;
     	this.posicionBoy = this.casa.getCelda(x_boy,y_boy);
     	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
     	this.casa.getPlano()[x_agente][y_agente].setDescubierta(true);
     	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
+    	
+    	/*this.posicionLlamada = this.casa.getCelda(3,3);
+    	this.eventosCercanos.add(this.casa.getCelda(6, 6));
+    	this.eventosCercanos.add(this.casa.getCelda(6, 6));*/
+    	
         this.costo = 0.0;
     }
 
@@ -55,10 +66,11 @@ public class EstadoCarToy extends SearchBasedAgentState {
         
     	EstadoCarToy estadoClone = new EstadoCarToy();
     	
-    	estadoClone.setCasa(this.casa.clone());
-    		
+        estadoClone.setCasa(this.casa.clone());
+        estadoClone.setPosicionCarToy(this.posicionCarToy.clone());
+ 
     	estadoClone.setPosicionCarToy(this.posicionCarToy.clone());
-    	estadoClone.setPosicionBoy(this.posicionBoy.clone());
+    	estadoClone.setPosicionBoy(this.posicionBoy);
         	
     	estadoClone.costo = this.costo;
     	
@@ -73,13 +85,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
     public void updateState(Perception p) {
         
     	CarToyPerception carToyPerception = (CarToyPerception) p;
-    	
     	for(Celda celdaVecinaPercibida: carToyPerception.getCeldasVecinas()){
     		int x = celdaVecinaPercibida.getX();
     		int y = celdaVecinaPercibida.getY();
     		Celda celdaVecinaActual = this.casa.getCelda(x, y);
-    		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
     		celdaVecinaActual.setDescubierta(true);
+    		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
     	}
     }
 

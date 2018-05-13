@@ -32,10 +32,6 @@ public class CarToy extends SearchBasedAgent {
         operators.addElement(new IrOeste());
         operators.addElement(new IrSur());
         operators.addElement(new IrEste());
-        //operators.addElement(new IrNoreste());
-        //operators.addElement(new IrNoroeste());
-        //operators.addElement(new IrSureste());
-        //operators.addElement(new IrSuroeste());
         
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);
@@ -51,11 +47,11 @@ public class CarToy extends SearchBasedAgent {
     	Strategy strategy = null;
         // Create the search strategy
     	//strategy = new DepthFirstSearch();
-    	//strategy = new BreathFirstSearch();   
+    	strategy = new BreathFirstSearch();   
  		//IStepCostFunction cost = new CostFunction();
 
  		//strategy = new UniformCostSearch(cost); 
-    	strategy = new AStarSearch(new CostFunction(), new Heuristic());
+    	//strategy = new AStarSearch(new CostFunction(), new Heuristic());
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
