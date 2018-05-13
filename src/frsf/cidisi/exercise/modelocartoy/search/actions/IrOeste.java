@@ -2,6 +2,7 @@ package frsf.cidisi.exercise.modelocartoy.search.actions;
 
 import model.Casa;
 import model.Celda;
+import model.TipoSuelo;
 import frsf.cidisi.exercise.modelocartoy.search.EstadoAmbiente;
 import frsf.cidisi.exercise.modelocartoy.search.EstadoCarToy;
 import frsf.cidisi.faia.agent.search.SearchAction;
@@ -20,14 +21,20 @@ public class IrOeste extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX();
 		int y_next = posAgente.getY() - 1;
-				
-		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))
-					&& agState.getCeldasDescubiertas().contains(agState.getCasa().getCelda(x_next, y_next))){
-				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));	
-				this.costo = posAgente.getCosto() * 0.5 + agState.getCasa().getCelda(x_next,y_next).getCosto() * 0.5;
+
+		//si la siguiente celda no se va del mapa
+		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
+			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
+			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
+				agState.setPosicionCarToy(siguiente);
+				siguiente.incrementarVisitas();
+				double costoCeldaActual = posAgente.getCosto();
+				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
+					costoCeldaActual /= 2.0;
+				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
+					costoCeldaActual *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
 				agState.incrementarCosto(this.costo);
 				return agState;	
 			}
@@ -49,12 +56,21 @@ public class IrOeste extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX();
 		int y_next = posAgente.getY() - 1;
-				
-		if(Casa.isBetweenLimits(x_next, y_next) && agState.getCasa().getCelda(x_next, y_next).esAccisble()) {
-			//agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-			if(!agState.getCeldasVisitadas().contains(agState.getCasa().getCelda(x_next, y_next))){
-				agState.setPosicionCarToy(agState.getCasa().getCelda(x_next, y_next));
-				agState.addCeldaVisitada(agState.getCasa().getCelda(x_next, y_next));
+
+		//si la siguiente celda no se va del mapa
+		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
+			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
+			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
+				agState.setPosicionCarToy(siguiente);
+				siguiente.incrementarVisitas();
+				double costoCeldaActual = posAgente.getCosto();
+				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
+					costoCeldaActual /= 2.0;
+				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
+					costoCeldaActual *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
+				agState.incrementarCosto(this.costo);
 				environmentState.setPosicionAgente(x_next,y_next);
 				return environmentState;
 			}

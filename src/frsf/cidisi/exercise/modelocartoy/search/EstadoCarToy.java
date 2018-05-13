@@ -7,6 +7,7 @@ import java.util.List;
 import model.Celda;
 import model.Casa;
 import model.TipoSuelo;
+import utils.Matriz;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
@@ -19,20 +20,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
     
     private Celda posicionCarToy;
 	private Celda posicionBoy;
-
-    private List<Celda> celdasDescubiertas;
-    private List<Celda> celdasVisitadas;
     
     private double costo;
 	
-    public EstadoCarToy(Casa casa) {
+    public EstadoCarToy() {
     
-    	this.casa = casa;
-    	this.posicionCarToy = new Celda();
-    	this.posicionBoy = new Celda();
-    	this.celdasDescubiertas = new ArrayList<Celda>();
-        this.celdasVisitadas = new ArrayList<Celda>();
-        this.costo = 0.0;
+        this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico-sin-descubrir.txt"));
         this.initState();
     }
     
@@ -44,10 +37,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-        this.posicionCarToy = this.casa.getPosicionAgente();
-        this.posicionBoy = this.casa.getPosicionBoy();
-        this.celdasDescubiertas.add(this.posicionCarToy);
-        this.celdasVisitadas.add(this.posicionCarToy);
+    	int x_boy = 8, y_boy = 6;
+    	int x_agente = 1, y_agente = 1;
+    	this.posicionBoy = this.casa.getCelda(x_boy,y_boy);
+    	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
+    	this.casa.getPlano()[x_agente][y_agente].setDescubierta(true);
+    	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
         this.costo = 0.0;
     }
 
@@ -58,27 +53,15 @@ public class EstadoCarToy extends SearchBasedAgentState {
     @Override
     public SearchBasedAgentState clone() {
         
-    	EstadoCarToy estadoClone = new EstadoCarToy(this.casa);
+    	EstadoCarToy estadoClone = new EstadoCarToy();
     	
+    	estadoClone.setCasa(this.casa.clone());
+    		
     	estadoClone.setPosicionCarToy(this.posicionCarToy.clone());
     	estadoClone.setPosicionBoy(this.posicionBoy.clone());
         	
-    	List<Celda> newCeldasDescubiertas = new ArrayList<Celda>();
-    	for(Celda c:this.getCeldasDescubiertas()){
-    		newCeldasDescubiertas.add(c.clone());
-    	}
-    	
-    	List<Celda> newCeldasVisitadas = new ArrayList<Celda>();
-    	for(Celda c:this.getCeldasVisitadas()){
-    		newCeldasVisitadas.add(c.clone());
-    	}
-    	
-    	estadoClone.setCeldasDescubiertas(newCeldasDescubiertas);
-    	estadoClone.setCeldasVisitadas(newCeldasVisitadas);
-
-    	
     	estadoClone.costo = this.costo;
-  		
+    	
         return estadoClone;
     }
 
@@ -91,9 +74,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
         
     	CarToyPerception carToyPerception = (CarToyPerception) p;
     	
-    	for(Celda celdaVecina: carToyPerception.getCeldasVecinas()){
-    		if(!this.celdasDescubiertas.contains(celdaVecina))
-    			this.celdasDescubiertas.add(celdaVecina);
+    	for(Celda celdaVecinaPercibida: carToyPerception.getCeldasVecinas()){
+    		int x = celdaVecinaPercibida.getX();
+    		int y = celdaVecinaPercibida.getY();
+    		Celda celdaVecinaActual = this.casa.getCelda(x, y);
+    		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
+    		celdaVecinaActual.setDescubierta(true);
     	}
     }
 
@@ -103,14 +89,15 @@ public class EstadoCarToy extends SearchBasedAgentState {
     @Override
     public String toString() {
         StringBuffer str = new StringBuffer();
+       
         str.append("\n");
-		for(int i = 0; i < Casa.X_CELLS ; i++){
+		for(int i = 0; i < this.casa.X_CELLS ; i++){
 			str.append("|");
-			for (int j = 0; j < Casa.Y_CELLS; j++){
-				if(this.celdasDescubiertas.contains(this.casa.getCelda(i, j))){
-					if(this.posicionCarToy != null && this.posicionCarToy.getX() == i && this.posicionCarToy.getY() == j)
-						str.append("A|");
-					else if(this.posicionBoy != null && this.posicionBoy.getX() == i && this.posicionBoy.getY() == j) 
+			for (int j = 0; j < this.casa.Y_CELLS; j++){
+				if(this.posicionCarToy != null && this.posicionCarToy.getX() == i && this.posicionCarToy.getY() == j)
+					str.append("A|");
+				else if(this.casa.getCelda(i, j).isDescubierta()){
+					if(this.posicionBoy != null && this.posicionBoy.getX() == i && this.posicionBoy.getY() == j) 
 						str.append("B|");
 					else 
 						str.append(this.casa.getCelda(i, j).getChar() + "|");
@@ -121,10 +108,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
 			}
 			str.append("\n");
 		}
-		str.append("\n\n");
-		str.append("Descubiertas : " + this.celdasDescubiertas);
-		str.append("\n\n");
-		str.append("Visitadas : " + this.celdasVisitadas);
+		str.append("Costo: " + this.getCosto());
         return str.toString();
     }
 
@@ -138,47 +122,28 @@ public class EstadoCarToy extends SearchBasedAgentState {
        EstadoCarToy estadoComparado = (EstadoCarToy) obj;
        
        // Comparo que esten en la misma posicion
-       boolean mismaPosicion;// = estadoComparado.getPosicionCarToy().equals(this.getPosicionCarToy());
+       boolean mismaPosicion;
        mismaPosicion = estadoComparado.getPosicionCarToy().getX() == this.getPosicionCarToy().getX() &&
        estadoComparado.getPosicionCarToy().getY() == this.getPosicionCarToy().getY();
        
-       /*
-       // Comparo que tengan las mismas visitadas y descubiertas
-       boolean mismasCeldasVisitadas = true;
-       boolean mismasCeldasDescubiertas = true;
        
-       // Primero me fijo si la cantidad de visistadas y de descubiertas son iguales en ambos estados
-       mismasCeldasVisitadas = this.getCeldasVisitadas().size() == estadoComparado.getCeldasVisitadas().size();
-       mismasCeldasDescubiertas = this.getCeldasDescubiertas().size() == estadoComparado.getCeldasDescubiertas().size();
-       
-       // Si visito la misma cantidad de celdas, valido que sean las mismas
-       if(mismasCeldasVisitadas){
-    	   Object[] actuales = this.getCeldasVisitadas().toArray();
-    	   Object[] comparadas = estadoComparado.getCeldasVisitadas().toArray();
-    	   
-    	   Arrays.sort(actuales);
-    	   Arrays.sort(comparadas);
-    	   for(int i=0; i<actuales.length;i++)
-    		   if(! ((Celda)actuales[i]).equals(comparadas[i])){
-    			   mismasCeldasVisitadas = false;
+       boolean mismasDescubiertas = true;
+       boolean mismasVisitas = true;
+
+       for(int i=0 ; i<this.casa.X_CELLS; i++) {
+    	   for(int j=0; j<this.casa.Y_CELLS; j++) {
+    		   if(this.casa.getCelda(i, j).isDescubierta() != estadoComparado.getCasa().getCelda(i, j).isDescubierta()) {
+    			   mismasDescubiertas = false;
     			   break;
     		   }
+    		   if(this.casa.getCelda(i, j).getVisitas() != estadoComparado.getCasa().getCelda(i, j).getVisitas()) {
+    			   mismasVisitas = false;
+    			   break;
+    		   }
+    	   }
        }
-       
-       // Si descubrio la misma cantidad de celdas, valido que sean las mismas
-       if(mismasCeldasDescubiertas){
-    	   Object[] actuales = this.getCeldasDescubiertas().toArray();
-    	   Object[] comparadas = estadoComparado.getCeldasDescubiertas().toArray();
-    	   
-    	   Arrays.sort(actuales);
-    	   Arrays.sort(comparadas);
-    	   for(int i=0; i<actuales.length;i++)
-    		   if(! ((Celda)actuales[i]).equals(comparadas[i])){
-    			   mismasCeldasDescubiertas = false;
-    			   break;
-    		   }
-       }*/
-       return mismaPosicion; //&& mismasCeldasDescubiertas && mismasCeldasVisitadas;
+     
+       return mismaPosicion && mismasDescubiertas && mismasVisitas; 
     }
 
 	public void setCasa(Casa casa) {
@@ -197,30 +162,6 @@ public class EstadoCarToy extends SearchBasedAgentState {
 		return posicionCarToy;
 	}
 
-	public List<Celda> getCeldasDescubiertas() {
-		return celdasDescubiertas;
-	}
-
-	public void setCeldasDescubiertas(List<Celda> celdasDescubiertas) {
-		this.celdasDescubiertas = celdasDescubiertas;
-	}
-
-	public List<Celda> getCeldasVisitadas() {
-		return celdasVisitadas;
-	}
-
-	public void setCeldasVisitadas(List<Celda> celdasVisitadas) {
-		this.celdasVisitadas = celdasVisitadas;
-	}
-	
-	public void addCeldaVisitada(Celda c){
-		this.celdasVisitadas.add(c);
-	}
-	
-	public void addCeldaDescubierta(Celda c){
-		this.celdasDescubiertas.add(c);
-	}
-	
 	public Celda getPosicionBoy() {
 		return posicionBoy;
 	}
@@ -232,13 +173,11 @@ public class EstadoCarToy extends SearchBasedAgentState {
 	public double getCosto(){
 
 		return this.costo;
-
 	}
 
 	public void incrementarCosto(double costo){
 
 		this.costo += costo;
-
 	}
 }
 

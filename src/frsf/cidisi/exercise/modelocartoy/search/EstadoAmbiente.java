@@ -1,7 +1,12 @@
 package frsf.cidisi.exercise.modelocartoy.search;
 
 import model.Celda;
+import utils.Matriz;
 import model.Casa;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import frsf.cidisi.faia.state.EnvironmentState;
 
 /**
@@ -14,11 +19,9 @@ public class EstadoAmbiente extends EnvironmentState {
     private Celda posicionCarToy;
     private Celda posicionBoy;
 	
-	public EstadoAmbiente(Casa casa) {
+	public EstadoAmbiente() {
         
-        this.casa = casa;
-        this.posicionBoy = new Celda();
-        this.posicionCarToy = new Celda();
+        this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico.txt"));
         this.initState();
     }
 
@@ -27,8 +30,8 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = casa.getPosicionBoy();
-    	this.posicionCarToy = casa.getPosicionAgente();
+    	this.posicionBoy = this.casa.getCelda(8,6);
+    	this.posicionCarToy = this.casa.getCelda(1,1);
     }
 
     /**
@@ -36,19 +39,29 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public String toString() {
-        String str = "";
-
-        str += "Estado del ambiente: \n";
-		
-        str += this.casa.toString();
+        StringBuffer str = new StringBuffer();
+    	
+    	str.append("\n");
+		for(int i = 0; i < casa.X_CELLS ; i++){
+			str.append("|");
+			for (int j = 0; j < casa.Y_CELLS; j++){
+					if(this.posicionCarToy != null && this.posicionCarToy.getX() == i && this.posicionCarToy.getY() == j)
+						str.append("A|");
+					else if(this.posicionBoy != null && this.posicionBoy.getX() == i && this.posicionBoy.getY() == j) 
+						str.append("B|");
+					else 
+						str.append(this.casa.getCelda(i, j).getChar() + "|");
+				}
+			}
+			str.append("\n");
         
-        return str;
+        return str.toString();
     }
-	
+    
      public Casa getCasa(){
         return this.casa;
      }
-     public void setplanoCasa(Casa arg){
+     public void setCasa(Casa arg){
         this.casa = arg;
      }
      
@@ -69,13 +82,11 @@ public class EstadoAmbiente extends EnvironmentState {
  	}
  	
  	public void setPosicionAgente(int x, int y){
- 		this.casa.setPosicionAgente(x, y);
- 		this.posicionCarToy = this.casa.getPosicionAgente();
+ 		this.posicionCarToy = this.casa.getCelda(x, y);
  	}
 
  	public void setPosicionBoy(int x, int y){
- 		this.casa.setPosicionBoy(x, y);
- 		this.posicionBoy = this.casa.getPosicionBoy();
+ 		this.posicionBoy = this.casa.getCelda(x, y);
  	}
 }
 

@@ -7,9 +7,9 @@ import frsf.cidisi.faia.environment.Environment;
 
 public class AmbienteCarToy extends Environment {
 
-    public AmbienteCarToy(Casa casa) {
+    public AmbienteCarToy() {
         // Create the environment state
-        this.environmentState = new EstadoAmbiente(casa);
+        this.environmentState = new EstadoAmbiente();
     }
 
     public EstadoAmbiente getEnvironmentState() {
@@ -28,9 +28,7 @@ public class AmbienteCarToy extends Environment {
          CarToyPerception perception = new CarToyPerception();
 		         
          EstadoAmbiente environmentState = this.getEnvironmentState();
-         perception.setPosicionBoy(environmentState.getPosicionBoy());
-         perception.setCeldasVecinas(environmentState.getCasa().
-        		 getCeldasVecinas(environmentState.getPosicionAgente()));
+         perception.setCeldasVecinas(environmentState.getCasa().getCeldasVecinas(environmentState.getPosicionAgente()));
          
         // Return the perception
         return perception;

@@ -17,13 +17,13 @@ import model.Casa;
 
 public class CarToy extends SearchBasedAgent {
 
-    public CarToy(Casa casa) {
+    public CarToy() {
 
         // The Agent Goal
         ObjetivoCarToy agGoal = new ObjetivoCarToy();
 
         // The Agent State
-        EstadoCarToy agState = new EstadoCarToy(casa);
+        EstadoCarToy agState = new EstadoCarToy();
         this.setAgentState(agState);
 
         // Create the operators
@@ -32,10 +32,10 @@ public class CarToy extends SearchBasedAgent {
         operators.addElement(new IrOeste());
         operators.addElement(new IrSur());
         operators.addElement(new IrEste());
-        operators.addElement(new IrNoreste());
+        //operators.addElement(new IrNoreste());
         //operators.addElement(new IrNoroeste());
         //operators.addElement(new IrSureste());
-        operators.addElement(new IrSuroeste());
+        //operators.addElement(new IrSuroeste());
         
         // Create the Problem which the agent will resolve
         Problem problem = new Problem(agGoal, agState, operators);
@@ -50,11 +50,12 @@ public class CarToy extends SearchBasedAgent {
     	
     	Strategy strategy = null;
         // Create the search strategy
-    	strategy = new DepthFirstSearch();
-//    	strategy = new BreathFirstSearch();   
+    	//strategy = new DepthFirstSearch();
+    	//strategy = new BreathFirstSearch();   
  		//IStepCostFunction cost = new CostFunction();
 
-// 		strategy = new UniformCostSearch(cost); 
+ 		//strategy = new UniformCostSearch(cost); 
+    	strategy = new AStarSearch(new CostFunction(), new Heuristic());
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
