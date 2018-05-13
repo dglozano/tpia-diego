@@ -30,7 +30,7 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = this.casa.getCelda(14,5);
+    	this.posicionBoy = this.casa.getCelda(8,6);
     	this.posicionCarToy = this.casa.getCelda(1,1);
     }
 

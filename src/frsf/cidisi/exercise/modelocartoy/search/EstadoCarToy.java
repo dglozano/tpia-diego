@@ -37,8 +37,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = this.casa.getCelda(14,5);
-    	this.posicionCarToy = this.casa.getCelda(1,1);
+    	int x_boy = 8, y_boy = 6;
+    	int x_agente = 1, y_agente = 1;
+    	this.posicionBoy = this.casa.getCelda(x_boy,y_boy);
+    	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
+    	this.casa.getPlano()[x_agente][y_agente].setDescubierta(true);
+    	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
         this.costo = 0.0;
     }
 
@@ -70,10 +74,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
         
     	CarToyPerception carToyPerception = (CarToyPerception) p;
     	
-    	for(Celda celdaVecina: carToyPerception.getCeldasVecinas()){
-    		this.casa.getCelda(celdaVecina.getX(), celdaVecina.getY()).setCosto(celdaVecina.getCosto());
-    		this.casa.getCelda(celdaVecina.getX(), celdaVecina.getY()).setTipoSuelo(celdaVecina.getTipoSuelo());
-    		this.casa.getCelda(celdaVecina.getX(), celdaVecina.getY()).setDescubierta(true);
+    	for(Celda celdaVecinaPercibida: carToyPerception.getCeldasVecinas()){
+    		int x = celdaVecinaPercibida.getX();
+    		int y = celdaVecinaPercibida.getY();
+    		Celda celdaVecinaActual = this.casa.getCelda(x, y);
+    		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
+    		celdaVecinaActual.setDescubierta(true);
     	}
     }
 
@@ -102,6 +108,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
 			}
 			str.append("\n");
 		}
+		str.append("Costo: " + this.getCosto());
         return str.toString();
     }
 
@@ -121,6 +128,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
        
        
        boolean mismasDescubiertas = true;
+       boolean mismasVisitas = true;
 
        for(int i=0 ; i<this.casa.X_CELLS; i++) {
     	   for(int j=0; j<this.casa.Y_CELLS; j++) {
@@ -128,10 +136,14 @@ public class EstadoCarToy extends SearchBasedAgentState {
     			   mismasDescubiertas = false;
     			   break;
     		   }
+    		   if(this.casa.getCelda(i, j).getVisitas() != estadoComparado.getCasa().getCelda(i, j).getVisitas()) {
+    			   mismasVisitas = false;
+    			   break;
+    		   }
     	   }
        }
      
-       return mismaPosicion && mismasDescubiertas; 
+       return mismaPosicion && mismasDescubiertas && mismasVisitas; 
     }
 
 	public void setCasa(Casa casa) {

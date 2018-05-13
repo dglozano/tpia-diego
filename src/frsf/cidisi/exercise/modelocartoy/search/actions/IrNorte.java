@@ -2,6 +2,7 @@ package frsf.cidisi.exercise.modelocartoy.search.actions;
 
 import model.Casa;
 import model.Celda;
+import model.TipoSuelo;
 import frsf.cidisi.exercise.modelocartoy.search.EstadoAmbiente;
 import frsf.cidisi.exercise.modelocartoy.search.EstadoCarToy;
 import frsf.cidisi.faia.agent.search.SearchAction;
@@ -28,7 +29,12 @@ public class IrNorte extends SearchAction {
 			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
-				this.costo = posAgente.getCosto() * 0.5 + siguiente.getCosto() * 0.5;
+				double costoCeldaActual = posAgente.getCosto();
+				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_N)
+					costoCeldaActual /= 2.0;
+				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_S)
+					costoCeldaActual *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
 				agState.incrementarCosto(this.costo);
 				return agState;	
 			}
@@ -59,6 +65,13 @@ public class IrNorte extends SearchAction {
 			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
+				double costoCeldaActual = posAgente.getCosto();
+				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_N)
+					costoCeldaActual /= 2.0;
+				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_S)
+					costoCeldaActual *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
+				agState.incrementarCosto(this.costo);
 				environmentState.setPosicionAgente(x_next,y_next);
 				return environmentState;
 			}

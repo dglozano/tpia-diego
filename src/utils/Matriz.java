@@ -74,63 +74,48 @@ public class Matriz {
 		switch (caracter) {
 		case '_':
 			suelo=TipoSuelo.COMUN;
-			costo=1.0;
 			break;
 		case '#':
 			suelo=TipoSuelo.PARED;
-			costo=9999.0;
 			break;
 		case '$':
 			suelo=TipoSuelo.OBSTACULO;
-			costo=9999.0;
 			break;
 		case '~':
 			suelo=TipoSuelo.PASTO;
-			costo=2.0;
 			break;
 		case 'a':
 			suelo=TipoSuelo.PUERTA_ABIERTA;
-			costo=1.0;
 			break;
 		case 'c':
 			suelo=TipoSuelo.PUERTA_CERRADA;
-			costo=9999.0;
 			break;
 		case '\'':
 			suelo=TipoSuelo.ALFOMBRA;
-			costo=2.0;
 			break;
 		case '!':
 			suelo=TipoSuelo.AGUA;
-			costo=0.5;
 			break;
 		case '%':
 			suelo=TipoSuelo.ARENA;
-			costo=2.0;
 			break;
 		case '*':
 			suelo=TipoSuelo.BASURA;
-			costo=2.0;
 			break;
 		case '&':
 			suelo=TipoSuelo.ROPA;
-			costo=2.0;
 			break;
 		case 'N':
 			suelo=TipoSuelo.ESCALERA_N;
-			costo=1.0;
 			break;
 		case 'S':
 			suelo=TipoSuelo.ESCALERA_S;
-			costo=1.0;
 			break;
 		case 'E':
 			suelo=TipoSuelo.ESCALERA_E;
-			costo=1.0;
 			break;
 		case 'O':
 			suelo=TipoSuelo.ESCALERA_O;
-			costo=1.0;
 			break;
 
 		default:
@@ -138,7 +123,6 @@ public class Matriz {
 		}
 
 		celda.setTipoSuelo(suelo);
-		celda.setCosto(costo);
 		celda.setVisitas(0);
 		celda.setDescubierta(false);
 

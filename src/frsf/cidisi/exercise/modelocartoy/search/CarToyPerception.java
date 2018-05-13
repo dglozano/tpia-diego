@@ -28,11 +28,12 @@ public class CarToyPerception extends Perception {
     public void initPerception(Agent agentIn, Environment environmentIn) {
     	
         CarToy agent = (CarToy) agentIn;
+        EstadoCarToy agentState = (EstadoCarToy) agent.getAgentState();
         AmbienteCarToy environment = (AmbienteCarToy) environmentIn;
         EstadoAmbiente environmentState =
                 environment.getEnvironmentState();
         
-       this.celdasVecinas = environmentState.getCasa().getCeldasVecinas(environmentState.getPosicionAgente());
+       this.celdasVecinas = environmentState.getCasa().getCeldasVecinas(agentState.getPosicionCarToy());
     }
     
     @Override
