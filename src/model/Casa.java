@@ -31,7 +31,7 @@ public class Casa {
 		
 		for(int i=0 ; i<this.X_CELLS; i++) {
 			for(int j=0;j <this.Y_CELLS; j++) {
-				casaClone.setCelda(this.getCelda(i, j));
+				casaClone.setCelda(this.getCelda(i, j).clone());
 			}
 		}
 
@@ -43,18 +43,7 @@ public class Casa {
 		
 		int x = c.getX();
 		int y = c.getY();
-		/*
-        for(int i=0; i<3; i++){
-        	for(int j=0; j<3; j++){
-        		if(i!=1 || j!=1){
-        			if(this.isBetweenLimits(x+i-1, y+j-1)){
-        				celdasVecinas.add(this.plano[x+i-1][y+j-1]);
-        			}
-        		}
-        	}
-        }*/
 		
-
         if(this.isBetweenLimits(x, y-1)){
         	celdasVecinas.add(this.plano[x][y-1]);
         }
@@ -68,7 +57,6 @@ public class Casa {
         	celdasVecinas.add(this.plano[x][y+1]);
         }
  
-        
         return celdasVecinas;
 	}
 	
@@ -95,7 +83,7 @@ public class Casa {
 	public boolean hayCeldaVecinaConMenosVisitas(Celda actual, Celda siguiente) {
 		List<Celda> vecinas = this.getCeldasVecinas(actual);
 		for(Celda v: vecinas) {
-			if(v.esAccisble() && v.getVisitas() < siguiente.getVisitas()) {
+			if(v.esAccisble() && !v.equals(siguiente) && 0 < siguiente.getVisitas() - v.getVisitas()) {
 				return true;
 			}
 		}

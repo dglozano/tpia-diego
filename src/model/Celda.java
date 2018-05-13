@@ -5,7 +5,6 @@ public class Celda {
     private TipoSuelo tipoSuelo;
     private int x;
     private int y;
-    private double costo;
     private int visitas;
     private boolean descubierta;
     
@@ -33,7 +32,6 @@ public class Celda {
 		celdaClone.visitas = this.visitas;
 		celdaClone.descubierta = this.descubierta;
 		celdaClone.tipoSuelo = this.tipoSuelo;
-		celdaClone.costo = this.costo;
 		
 		return celdaClone;
 	}
@@ -53,7 +51,7 @@ public class Celda {
 				str = "#";
 				break;
 			case PUERTA_ABIERTA:
-				str = "o";
+				str = "a";
 				break;
 			case PUERTA_CERRADA:
 				str = "c";
@@ -65,7 +63,31 @@ public class Celda {
 				str = "~";
 				break;
 			case ALFOMBRA:
-				str = "\\";
+				str = "\'";
+				break;
+			case AGUA:
+				str = "!";
+				break;
+			case ARENA:
+				str = "%";
+				break;
+			case BASURA:
+				str = "*";
+				break;
+			case ROPA:
+				str = "&";
+				break;
+			case ESCALERA_N:
+				str = "N";
+				break;
+			case ESCALERA_O:
+				str = "O";
+				break;
+			case ESCALERA_S:
+				str = "S";
+				break;
+			case ESCALERA_E:
+				str = "E";
 				break;
 			default:
 				str = "?";
@@ -75,7 +97,7 @@ public class Celda {
 	
 	@Override
 	public String toString(){
-		return "<" + this.x + "," + this.y + "> " + this.getChar();
+		return "<" + this.getChar() + "," + this.getVisitas() + "," + this.x + "," + this.y + "> " ;
 	}
 
 	public void setX(int x) {
@@ -101,11 +123,57 @@ public class Celda {
 				ts != TipoSuelo.PUERTA_CERRADA;
 	}
 
-	public void setCosto(double costo) {
-		this.costo = costo;
-	}
-
 	public double getCosto() {
+		double costo = 0.0;
+		switch(this.tipoSuelo){
+			case COMUN:
+				costo = 1.0;
+				break;
+			case PARED:
+				costo = 1.0;
+				break;
+			case PUERTA_ABIERTA:
+				costo = 1.0;
+				break;
+			case PUERTA_CERRADA:
+				costo = 1.0;
+				break;
+			case OBSTACULO:
+				costo = 9999.0;
+				break;
+			case PASTO:
+				costo = 2.0;
+				break;
+			case ALFOMBRA:
+				costo = 2.0;
+				break;
+			case AGUA:
+				costo = 0.5;
+				break;
+			case ARENA:
+				costo = 2.0;
+				break;
+			case BASURA:
+				costo = 2.0;
+				break;
+			case ROPA:
+				costo = 2.0;
+				break;
+			case ESCALERA_N:
+				costo = 1.0;
+				break;
+			case ESCALERA_O:
+				costo = 1.0;
+				break;
+			case ESCALERA_S:
+				costo = 1.0;
+				break;
+			case ESCALERA_E:
+				costo = 1.0;
+				break;
+			default:
+				costo = 1.0;
+		}
 		return costo;
 	}
 

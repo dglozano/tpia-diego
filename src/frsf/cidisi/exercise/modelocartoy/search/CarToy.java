@@ -50,11 +50,12 @@ public class CarToy extends SearchBasedAgent {
     	
     	Strategy strategy = null;
         // Create the search strategy
-    	strategy = new DepthFirstSearch();
-//    	strategy = new BreathFirstSearch();   
+    	//strategy = new DepthFirstSearch();
+    	//strategy = new BreathFirstSearch();   
  		//IStepCostFunction cost = new CostFunction();
 
-// 		strategy = new UniformCostSearch(cost); 
+ 		//strategy = new UniformCostSearch(cost); 
+    	strategy = new AStarSearch(new CostFunction(), new Heuristic());
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
