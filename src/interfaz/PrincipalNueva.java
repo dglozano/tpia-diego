@@ -96,8 +96,6 @@ public class PrincipalNueva extends javax.swing.JFrame {
     }
     
     public void actualizarTablero(char[][] nuevoPlano){
-		// TODO este es el metodo que hay que llamar en cada paso del agente.- 
-    	//-Se debe pasar una matriz de caracteres tal como va mostrando por consola el FAIA.
     	jPanelMapa.removeAll();
     	int anchoPanel = jPanelMapa.getWidth();
     	int altoPanel =jPanelMapa.getHeight();
@@ -209,7 +207,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
         buttonGroup1.add(jRbNinio);
         jRbNinio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jRbNinio.setText("Ni�o/a");
+        jRbNinio.setText("Ni�o   ");
         jRbNinio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRbNinioActionPerformed(evt);
@@ -454,7 +452,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
     	if (jLabelPosAgente.getText()=="Inaccesible" || jLabelPosAgente.getText()=="(-- ; --)" || jLabelPosNinio.getText()=="Inaccesible" || jLabelPosNinio.getText()=="(-- ; --)"){
     		JOptionPane.showMessageDialog(null, "Seleccione posiciones validas para el juguete y el niño.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else if (cbEstrategia.getSelectedIndex()==0){
-    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de busqueda.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de búsqueda.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else{
     		 // Runs outside of the Swing UI thread
     	    new Thread(new Runnable() {
