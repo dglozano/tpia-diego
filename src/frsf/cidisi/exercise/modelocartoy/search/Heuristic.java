@@ -16,8 +16,8 @@ public class Heuristic implements IEstimatedCostFunction {
     public double getEstimatedCost(NTree node) {
         EstadoCarToy agState = (EstadoCarToy) node.getAgentState();
         
-        double xDestino = (double) agState.getPosicionBoy().getX();
-        double yDestino = (double) agState.getPosicionBoy().getY();
+        double xDestino = (double) agState.getProximoObjetivo().getX();
+        double yDestino = (double) agState.getProximoObjetivo().getY();
         double xActual = (double) agState.getPosicionCarToy().getX();
         double yActual = (double) agState.getPosicionCarToy().getY();
         

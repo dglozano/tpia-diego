@@ -1,6 +1,10 @@
 package frsf.cidisi.exercise.modelocartoy.search;
 
 import model.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
@@ -28,8 +32,19 @@ public class AmbienteCarToy extends Environment {
          CarToyPerception perception = new CarToyPerception();
 		         
          EstadoAmbiente environmentState = this.getEnvironmentState();
-         perception.setCeldasVecinas(environmentState.getCasa().getCeldasVecinas(environmentState.getPosicionAgente()));
+         List<Celda> celdasVecinas = environmentState.getCasa().getCeldasVecinas(environmentState.getPosicionAgente());
          
+         List<Celda>  eventosCercanos = new ArrayList<Celda>();
+         for(Celda c : celdasVecinas) {
+      	   if(environmentState.getEventosCercanos().contains(c)) {
+      		 perception.addEventoCercano(c.clone());
+      	   }
+      	   if(environmentState.getPosicionBoy().equals(c)) {
+      		 perception.setPosicionBoy(c.clone());
+      	   }
+         }
+         
+         perception.setCeldasVecinas(celdasVecinas);
         // Return the perception
         return perception;
     }
@@ -44,8 +59,10 @@ public class AmbienteCarToy extends Environment {
 
         EstadoAmbiente envState =
                 this.getEnvironmentState();
-
-        // TODO: Complete Method        
+        //si no hay mas eventos y no llego al ninio, falla
+        if(envState.getEventosCercanos().isEmpty() && !envState.getPosicionAgente().equals(envState.getPosicionBoy())) {
+        	return true;
+        }
 
         return false;
     }

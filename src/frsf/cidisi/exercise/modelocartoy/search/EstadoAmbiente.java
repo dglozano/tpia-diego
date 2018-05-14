@@ -18,10 +18,12 @@ public class EstadoAmbiente extends EnvironmentState {
     
     private Celda posicionCarToy;
     private Celda posicionBoy;
+    private List<Celda> eventosCercanos;
 	
 	public EstadoAmbiente() {
         
         this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico.txt"));
+        this.eventosCercanos = new ArrayList<Celda>();
         this.initState();
     }
 
@@ -30,8 +32,10 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = this.casa.getCelda(1,1);
+    	this.posicionBoy = this.casa.getCelda(13,1);
     	this.posicionCarToy = this.casa.getCelda(14,9);
+    	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
+    	this.eventosCercanos.add(this.casa.getCelda(13, 1).clone());
     }
 
     /**
@@ -89,5 +93,13 @@ public class EstadoAmbiente extends EnvironmentState {
  	public void setPosicionBoy(int x, int y){
  		this.posicionBoy = this.casa.getCelda(x, y);
  	}
+
+	public List<Celda> getEventosCercanos() {
+		return eventosCercanos;
+	}
+
+	public void setEventosCercanos(List<Celda> eventosCercanos) {
+		this.eventosCercanos = eventosCercanos;
+	}
 }
 

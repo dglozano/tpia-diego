@@ -53,11 +53,25 @@ public class PrincipalNueva extends javax.swing.JFrame {
     private JMenu opciones = new JMenu();
     private JMenuItem itemCargarTab = new JMenuItem();
     private JMenuItem itemSalir = new JMenuItem();
-    JFileChooser f = new JFileChooser();
+    JFileChooser f = new JFileChooser(); 
+    
+    private TipoBusqueda tipoBusqueda = TipoBusqueda.A_ESTRELLA;
     
     private static PrincipalNueva instancia;
 
-    private PrincipalNueva() {
+    public TipoBusqueda getTipoBusqueda() {
+		return tipoBusqueda;
+	}
+
+	public void setTipoBusqueda(TipoBusqueda tipoBusqueda) {
+		this.tipoBusqueda = tipoBusqueda;
+	}
+
+	public static void setInstancia(PrincipalNueva instancia) {
+		PrincipalNueva.instancia = instancia;
+	}
+
+	private PrincipalNueva() {
         initComponents();
         this.setExtendedState(MAXIMIZED_BOTH);
     }
@@ -219,7 +233,8 @@ public class PrincipalNueva extends javax.swing.JFrame {
         jPanelEstrategia.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Seleccionar Estrategia", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Verdana", 3, 12))); // NOI18N
 
         cbEstrategia.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
-        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estrategia de B�squeda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
+        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
+        		"Estrategia de B�squeda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
         cbEstrategia.setToolTipText("");
         cbEstrategia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbEstrategia.addActionListener(new java.awt.event.ActionListener() {
@@ -312,7 +327,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
         pack();
     }// </editor-fold>       
 
-    private void cbEstrategiaActionPerformed(java.awt.event.ActionEvent evt) {                                             
+    private void cbEstrategiaActionPerformed(java.awt.event.ActionEvent evt) {
         
     }                                            
 

@@ -13,6 +13,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 import interfaz.PrincipalNueva;
+import interfaz.TipoBusqueda;
 
 public class IrOeste extends SearchAction {
 
@@ -30,10 +31,10 @@ public class IrOeste extends SearchAction {
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
 			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
-			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)
-					&& siguiente.getVisitas() < 3) {
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
+
 				double costoCeldaActual = posAgente.getCosto();
 				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
 					costoCeldaActual /= 2.0;
@@ -66,7 +67,7 @@ public class IrOeste extends SearchAction {
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
 			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
-			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)) {
+			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
 				double costoCeldaActual = posAgente.getCosto();
@@ -76,20 +77,8 @@ public class IrOeste extends SearchAction {
 					costoCeldaActual *= 2.0;
 				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
 				agState.incrementarCosto(this.costo);
+				environmentState.setEventosCercanos(agState.getEventosCercanos());
 				environmentState.setPosicionAgente(x_next,y_next);
-				/*
-				SwingUtilities.invokeLater(new Runnable() {
-				    public void run() {
-				    	int x_ag = agState.getPosicionCarToy().getX();
-				    	int y_ag = agState.getPosicionCarToy().getY();
-				    	int x_ch = agState.getPosicionBoy().getX();
-				    	int y_ch = agState.getPosicionBoy().getY();
-				    	char[][] casaDisplay = agState.getCasa().getPlanoChars();
-				    	casaDisplay[x_ag][y_ag] = 'A';
-				    	casaDisplay[x_ch][y_ch] = 'B';
-						PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
-				    }
-				});*/
 								
 				return environmentState;
 			}

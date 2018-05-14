@@ -26,7 +26,6 @@ public class EstadoCarToy extends SearchBasedAgentState {
 	
 	//Primero va a la llamada. Si no lo encuentra antes y no esta alli, sigue yendo
 	//a la posicion de cada evento. Si no lo encontro en ninguno de ellos, falla.
-	private Celda posicionLlamada;
 	private List<Celda> eventosCercanos;
     
     private double costo;
@@ -34,7 +33,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
     public EstadoCarToy() {
     
         this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico-sin-descubrir.txt"));
-        //this.eventosCercanos = new ArrayList<Celda>();
+        this.eventosCercanos = new ArrayList<Celda>();
         this.initState();
     }
     
@@ -46,16 +45,16 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-    	int x_boy = 1, y_boy = 1;
+    	int x_boy = 13, y_boy = 1;
     	int x_agente = 14, y_agente = 9;
-    	this.posicionBoy = this.casa.getCelda(x_boy,y_boy);
+    	this.posicionBoy = null;
     	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
     	this.casa.getPlano()[x_agente][y_agente].setDescubierta(true);
     	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
     	
-    	/*this.posicionLlamada = this.casa.getCelda(3,3);
-    	this.eventosCercanos.add(this.casa.getCelda(6, 6));
-    	this.eventosCercanos.add(this.casa.getCelda(6, 6));*/
+    	//El primer evento es el de la llamada, porque debe ir primero ahi
+    	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
+    	this.eventosCercanos.add(this.casa.getCelda(13, 1).clone());
     	
         this.costo = 0.0;
     }
@@ -72,8 +71,14 @@ public class EstadoCarToy extends SearchBasedAgentState {
         estadoClone.setCasa(this.casa.clone());
         estadoClone.setPosicionCarToy(this.posicionCarToy.clone());
  
-    	estadoClone.setPosicionCarToy(this.posicionCarToy.clone());
-    	estadoClone.setPosicionBoy(this.posicionBoy);
+    	if(this.posicionBoy !=null)
+    		estadoClone.setPosicionBoy(this.posicionBoy.clone());
+    	
+    	List<Celda> eventosClone = new ArrayList<Celda>();
+    	for(Celda evento: this.eventosCercanos) {
+    		eventosClone.add(evento.clone());
+    	}
+    	estadoClone.setEventosCercanos(eventosClone);
         	
     	estadoClone.costo = this.costo;
     	
@@ -96,17 +101,30 @@ public class EstadoCarToy extends SearchBasedAgentState {
     		celdaVecinaActual.setTipoSuelo(celdaVecinaPercibida.getTipoSuelo());
     	}
     	
+    	List<Celda> eventosVecinosDescubiertos = carToyPerception.getEventosCercanosDescubiertos();
+    	if(eventosVecinosDescubiertos != null) {
+        	for(Celda e: eventosVecinosDescubiertos) {
+        		this.remove(e);
+        	}
+    	}
+    	if(carToyPerception.getPosicionBoy() != null) {
+    		this.posicionBoy = carToyPerception.getPosicionBoy();
+    	}
+    	
     	final EstadoCarToy  agState = this;
     	
 		SwingUtilities.invokeLater(new Runnable() {
 		    public void run() {
 		    	int x_ag = agState.getPosicionCarToy().getX();
 		    	int y_ag = agState.getPosicionCarToy().getY();
-		    	int x_ch = agState.getPosicionBoy().getX();
-		    	int y_ch = agState.getPosicionBoy().getY();
 		    	char[][] casaDisplay = agState.getCasa().getPlanoChars();
 		    	casaDisplay[x_ag][y_ag] = 'A';
-		    	casaDisplay[x_ch][y_ch] = 'B';
+		    	if(agState.getPosicionBoy() !=null) {
+			    	int x_ch = agState.getPosicionBoy().getX();
+			    	int y_ch = agState.getPosicionBoy().getY();
+			    	casaDisplay[x_ch][y_ch] = 'B';
+		    	}
+
 				PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
 		    }
 		});
@@ -207,6 +225,33 @@ public class EstadoCarToy extends SearchBasedAgentState {
 	public void incrementarCosto(double costo){
 
 		this.costo += costo;
+	}
+
+	public List<Celda> getEventosCercanos() {
+		return eventosCercanos;
+	}
+
+	public void setEventosCercanos(List<Celda> eventosCercanos) {
+		this.eventosCercanos = eventosCercanos;
+	}
+	
+	public void addEvento(Celda e) {
+		this.eventosCercanos.add(e);
+	}
+	
+	public void remove(Celda e) {
+		if(this.eventosCercanos.contains(e)) {
+			this.eventosCercanos.remove(e);
+		}
+	}
+	
+	public Celda getProximoObjetivo() {
+		if(this.posicionBoy != null) {
+			return this.posicionBoy;
+		} else if (!this.eventosCercanos.isEmpty()) {
+			return this.eventosCercanos.get(0);
+		}
+		return null;
 	}
 }
 

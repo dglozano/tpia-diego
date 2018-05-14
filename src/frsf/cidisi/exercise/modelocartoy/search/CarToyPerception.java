@@ -13,8 +13,12 @@ public class CarToyPerception extends Perception {
     public static int UNKNOWN_PERCEPTION = -1;   
 	
     private List<Celda> celdasVecinas;
+    private Celda posicionBoy;
+    private List<Celda> eventosCercanos;
 
 	public  CarToyPerception() {
+		this.eventosCercanos = new ArrayList<Celda>();
+		this.celdasVecinas = new ArrayList<Celda>();
     }
 
     public CarToyPerception(Agent agent, Environment environment) {
@@ -34,6 +38,15 @@ public class CarToyPerception extends Perception {
                 environment.getEnvironmentState();
         
        this.celdasVecinas = environmentState.getCasa().getCeldasVecinas(agentState.getPosicionCarToy());
+       this.eventosCercanos = new ArrayList<Celda>();
+       for(Celda c : this.celdasVecinas) {
+    	   if(environmentState.getEventosCercanos().contains(c)) {
+    		   this.addEventoCercano(c.clone());
+    	   }
+    	   if(environmentState.getPosicionBoy().equals(c)) {
+    		   this.setPosicionBoy(c.clone());
+    	   }
+       }
     }
     
     @Override
@@ -59,4 +72,25 @@ public class CarToyPerception extends Perception {
 	public void addCeldaVecina(Celda c){
 		this.celdasVecinas.add(c);
 	}
+
+	public Celda getPosicionBoy() {
+		return posicionBoy;
+	}
+
+	public void setPosicionBoy(Celda posicionBoy) {
+		this.posicionBoy = posicionBoy;
+	}
+
+	public List<Celda> getEventosCercanosDescubiertos() {
+		return eventosCercanos;
+	}
+
+	public void setEventosCercanosDescubiertos(List<Celda> eventosCercanos) {
+		this.eventosCercanos = eventosCercanos;
+	}
+	
+	public void addEventoCercano(Celda e){
+		this.eventosCercanos.add(e);
+	}
+	
 }

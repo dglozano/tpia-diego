@@ -118,5 +118,15 @@ public class Casa {
 		}
 		return casaSinDescubrir;
 	}
+	
+	public void limpiarVisitasRedonda(int x, int y) {
+		for(int i=x-4; i<x+4;i++) {
+			for(int j=y-4; i<j+4;j++) {
+				if(this.isBetweenLimits(i, j)) {
+					this.plano[i][j].setVisitas(0);
+				}
+			}
+		}
+	}
 }
 
