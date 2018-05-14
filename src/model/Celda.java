@@ -1,6 +1,6 @@
 package model;
 
-public class Celda {
+public class Celda implements Comparable {
 
     private TipoSuelo tipoSuelo;
     private int x;
@@ -195,5 +195,19 @@ public class Celda {
 
 	public void setDescubierta(boolean descubierta) {
 		this.descubierta = descubierta;
+	}
+
+	@Override
+	public int compareTo(Object arg0) {
+		Celda celdaComparada = (Celda) arg0;
+		if(celdaComparada.getX() < this.getX())
+			return -1;
+		else if (celdaComparada.getX() > this.getX())
+			return 1;
+		else if(celdaComparada.getY() < this.getY())
+			return -1;
+		else if(celdaComparada.getY() > this.getY())
+			return 1;
+		else return 0;
 	}
 }

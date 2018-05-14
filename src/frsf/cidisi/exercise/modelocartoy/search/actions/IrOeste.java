@@ -26,7 +26,8 @@ public class IrOeste extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX();
 		int y_next = posAgente.getY() - 1;
-
+		
+		
 		//si la siguiente celda no se va del mapa
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
@@ -40,8 +41,14 @@ public class IrOeste extends SearchAction {
 					costoCeldaActual /= 2.0;
 				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
 					costoCeldaActual *= 2.0;
-				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
+				double costoCeldaSig = siguiente.getCosto();
+				if(siguiente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
+					costoCeldaSig /= 2.0;
+				else if(siguiente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
+					costoCeldaSig *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + costoCeldaSig * 0.5;
 				agState.incrementarCosto(this.costo);
+				
 				return agState;	
 			}
 		}
@@ -62,7 +69,7 @@ public class IrOeste extends SearchAction {
 		Celda posAgente = agState.getPosicionCarToy();
 		int x_next = posAgente.getX();
 		int y_next = posAgente.getY() - 1;
-
+		
 		//si la siguiente celda no se va del mapa
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
@@ -70,13 +77,21 @@ public class IrOeste extends SearchAction {
 			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
+				
 				double costoCeldaActual = posAgente.getCosto();
 				if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
 					costoCeldaActual /= 2.0;
 				else if(posAgente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
 					costoCeldaActual *= 2.0;
-				this.costo = costoCeldaActual * 0.5 + siguiente.getCosto() * 0.5;
+				double costoCeldaSig = siguiente.getCosto();
+				if(siguiente.getTipoSuelo() == TipoSuelo.ESCALERA_O)
+					costoCeldaSig /= 2.0;
+				else if(siguiente.getTipoSuelo() == TipoSuelo.ESCALERA_E)
+					costoCeldaSig *= 2.0;
+				this.costo = costoCeldaActual * 0.5 + costoCeldaSig * 0.5;
 				agState.incrementarCosto(this.costo);
+				
+				agState.remove(siguiente);
 				environmentState.setEventosCercanos(agState.getEventosCercanos());
 				environmentState.setPosicionAgente(x_next,y_next);
 								

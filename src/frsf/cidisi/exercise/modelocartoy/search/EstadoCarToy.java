@@ -45,7 +45,6 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-    	int x_boy = 13, y_boy = 1;
     	int x_agente = 14, y_agente = 9;
     	this.posicionBoy = null;
     	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
@@ -53,8 +52,8 @@ public class EstadoCarToy extends SearchBasedAgentState {
     	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
     	
     	//El primer evento es el de la llamada, porque debe ir primero ahi
+    	this.eventosCercanos.add(this.casa.getCelda(6, 5).clone());
     	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
-    	this.eventosCercanos.add(this.casa.getCelda(13, 1).clone());
     	
         this.costo = 0.0;
     }
@@ -102,11 +101,12 @@ public class EstadoCarToy extends SearchBasedAgentState {
     	}
     	
     	List<Celda> eventosVecinosDescubiertos = carToyPerception.getEventosCercanosDescubiertos();
-    	if(eventosVecinosDescubiertos != null) {
+    	if(eventosVecinosDescubiertos != null && eventosVecinosDescubiertos.size() > 1) {
         	for(Celda e: eventosVecinosDescubiertos) {
         		this.remove(e);
         	}
     	}
+    	
     	if(carToyPerception.getPosicionBoy() != null) {
     		this.posicionBoy = carToyPerception.getPosicionBoy();
     	}
@@ -156,6 +156,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
 			str.append("\n");
 		}
 		str.append("Costo: " + this.getCosto());
+		str.append("Eventos cercanos" + this.getEventosCercanos());
         return str.toString();
     }
 
@@ -190,7 +191,22 @@ public class EstadoCarToy extends SearchBasedAgentState {
     	   }
        }
      
-       return mismaPosicion && mismasDescubiertas && mismasVisitas; 
+       boolean mismosEventosDescubiertos = this.getEventosCercanos().size() == estadoComparado.getEventosCercanos().size();
+       if(mismosEventosDescubiertos) {
+    	   Object[] actuales = this.getEventosCercanos().toArray();
+    	   Object[] comparados= estadoComparado.getEventosCercanos().toArray();
+    	   Arrays.sort(actuales);
+    	   Arrays.sort(comparados);
+    	   for(int i=0;i<actuales.length;i++) {
+    		   Celda celda1 = (Celda) actuales[i];
+    		   Celda celda2 = (Celda) comparados[i];
+    		   if(!celda1.equals(celda2)) {
+    			   mismosEventosDescubiertos=false;
+    		   }
+    	   }
+       }
+     
+       return mismaPosicion && mismasDescubiertas && mismasVisitas && mismosEventosDescubiertos; 
     }
 
 	public void setCasa(Casa casa) {

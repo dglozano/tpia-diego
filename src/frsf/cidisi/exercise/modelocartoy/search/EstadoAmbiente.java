@@ -32,10 +32,10 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = this.casa.getCelda(13,1);
+    	this.posicionBoy = this.casa.getCelda(1,1);
     	this.posicionCarToy = this.casa.getCelda(14,9);
+    	this.eventosCercanos.add(this.casa.getCelda(6, 5).clone());
     	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
-    	this.eventosCercanos.add(this.casa.getCelda(13, 1).clone());
     }
 
     /**
@@ -59,6 +59,8 @@ public class EstadoAmbiente extends EnvironmentState {
 			str.append("\n");
 			}
 			str.append("\n");
+			
+			str.append(this.getEventosCercanos());
         
         return str.toString();
     }
@@ -100,6 +102,10 @@ public class EstadoAmbiente extends EnvironmentState {
 
 	public void setEventosCercanos(List<Celda> eventosCercanos) {
 		this.eventosCercanos = eventosCercanos;
+	}
+	
+	public void remove(Celda c) {
+		this.eventosCercanos.remove(c);
 	}
 }
 
