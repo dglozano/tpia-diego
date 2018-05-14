@@ -40,7 +40,7 @@ import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 public class PrincipalNueva extends javax.swing.JFrame {
 	
 	private TableroGUI tablero;
-	char[][] plano;
+	public char[][] plano;
 	public int posXagente = -1;
 	public int posYagente = -1;
 	public int posXninio = -1;
@@ -89,6 +89,10 @@ public class PrincipalNueva extends javax.swing.JFrame {
     		instancia = new PrincipalNueva();
     	}
     	return instancia;
+    }
+    
+    public int getEstrategia() {
+    	return this.cbEstrategia.getSelectedIndex();
     }
     
     public void actualizarTablero(char[][] nuevoPlano){
@@ -669,6 +673,25 @@ public class PrincipalNueva extends javax.swing.JFrame {
     
     public void exito(){
     	JOptionPane.showMessageDialog(null, "El agente alcanz� la meta!", "�xito", JOptionPane.NO_OPTION);
+    	jPanelMapa.removeAll();
+    	jPanelMapa.updateUI();
+    	buttonGroup1.clearSelection();
+    	cbEstrategia.setSelectedIndex(0);
+        jLabelPosAgente.setText("(-- ; --)");
+        jLabelPosNinio.setText("(-- ; --)");
+        labelEvento1.setText("Sin Definir  ");
+        labelEvento2.setText("Sin Definir  ");
+        labelEvento3.setText("Sin Definir  ");
+    	exPosXagente = -1;
+    	exPosYagente = -1;
+    	exPosXninio = -1;
+    	exPosYninio = -1;
+    	exPosXevento1 = -1;
+    	exPosYevento1 = -1;
+    	exPosXevento2 = -1;
+    	exPosYevento2 = -1;
+    	exPosXevento3 = -1;
+    	exPosYevento3 = -1;
     }
     
     void itemSalir_ActionPerformed(ActionEvent e) {

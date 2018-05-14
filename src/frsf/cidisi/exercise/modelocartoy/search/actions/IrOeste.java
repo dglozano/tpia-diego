@@ -32,7 +32,7 @@ public class IrOeste extends SearchAction {
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
 			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
-			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
+			if(siguiente.esAccisble()  && siguiente.getVisitas() < 3 && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
 
@@ -74,7 +74,7 @@ public class IrOeste extends SearchAction {
 		if (agState.getCasa().isBetweenLimits(x_next, y_next)){
 			Celda siguiente = agState.getCasa().getCelda(x_next, y_next);
 			//si la siguiente celda es accesible y no hay vecinas con menos visitas que la siguiente
-			if(siguiente.esAccisble() && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
+			if(siguiente.esAccisble()  && siguiente.getVisitas() < 3  && !agState.getCasa().hayCeldaVecinaConMenosVisitas(posAgente, siguiente)){
 				agState.setPosicionCarToy(siguiente);
 				siguiente.incrementarVisitas();
 				

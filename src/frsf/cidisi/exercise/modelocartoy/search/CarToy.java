@@ -8,6 +8,7 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.solver.search.*;
+import interfaz.PrincipalNueva;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -46,11 +47,20 @@ public class CarToy extends SearchBasedAgent {
     	
     	Strategy strategy = null;
         // Create the search strategy
-    	//strategy = new BreathFirstSearch();
-    	//strategy = new BreathFirstSearch();   
-
- 		strategy = new UniformCostSearch(new CostFunction()); 
-    	//strategy = new AStarSearch(new CostFunction(), new Heuristic());
+    	PrincipalNueva pp = PrincipalNueva.getInstancia();
+    	switch(pp.getEstrategia()) {
+    	case 1:
+    		strategy = new DepthFirstSearch();
+    		break;
+    	case 2:
+    		strategy = new BreathFirstSearch();
+    		break;
+    	case 3:
+    		strategy = new UniformCostSearch(new CostFunction());
+    		break;
+    	case 4:
+    		strategy = new AStarSearch(new CostFunction(), new Heuristic());
+    	}
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);

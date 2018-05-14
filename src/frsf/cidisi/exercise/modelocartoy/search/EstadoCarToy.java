@@ -2,6 +2,7 @@ package frsf.cidisi.exercise.modelocartoy.search;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.SwingUtilities;
@@ -32,7 +33,9 @@ public class EstadoCarToy extends SearchBasedAgentState {
 	
     public EstadoCarToy() {
     
-        this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico-sin-descubrir.txt"));
+    	PrincipalNueva pp = PrincipalNueva.getInstancia();
+        this.casa = Casa.convertirASinDescubrir(new Casa(Matriz.crearMatrizDesdeChar(pp.plano)));
+        
         this.eventosCercanos = new ArrayList<Celda>();
         this.initState();
     }
@@ -45,20 +48,51 @@ public class EstadoCarToy extends SearchBasedAgentState {
      */
     @Override
     public void initState() {
-    	int x_agente = 14, y_agente = 9;
+    	PrincipalNueva pp = PrincipalNueva.getInstancia();
+    	int x_agente = pp.posYagente, y_agente = pp.posXagente;
     	this.posicionBoy = null;
     	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
     	this.casa.getPlano()[x_agente][y_agente].setDescubierta(true);
     	this.casa.getPlano()[x_agente][y_agente].incrementarVisitas();
     	
-    	//El primer evento es el de la llamada, porque debe ir primero ahi
-    	this.eventosCercanos.add(this.casa.getCelda(6, 5).clone());
-    	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
+    	if(this.casa.isBetweenLimits(pp.posYevento1, pp.posXevento1))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento1, pp.posXevento1).clone());
+    	if(this.casa.isBetweenLimits(pp.posYevento2, pp.posXevento2))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento2, pp.posXevento2).clone());
+    	if(this.casa.isBetweenLimits(pp.posYevento3, pp.posXevento3))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento3, pp.posXevento3).clone());
+    	if(this.casa.isBetweenLimits(pp.posYninio, pp.posXninio))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYninio, pp.posXninio).clone());
+    	
+    	this.sortEventosCercanos(this.posicionCarToy);
     	
         this.costo = 0.0;
     }
 
-    /**
+    private void sortEventosCercanos(final Celda posCarToy) {
+    	// Los ordenos de mas cercano a mas lejano
+    	this.eventosCercanos.sort(new Comparator<Celda>() {
+
+			@Override
+			public int compare(Celda arg0, Celda arg1) {
+				if(distanciaEnBloques(posCarToy, arg0) < distanciaEnBloques(posCarToy,arg1)) {
+					return -1;
+				} else if (distanciaEnBloques(posCarToy, arg0) > distanciaEnBloques(posCarToy,arg1)) {
+					return 1;
+				}
+				else return 0;
+			}
+			
+			private int distanciaEnBloques(Celda actual, Celda c) {
+				int x1 = actual.getX(), y1 = actual.getY();
+				int x2 = c.getX(), y2 = c.getY();
+				return Math.abs(x1-x2) + Math.abs(y1-y2);
+			}
+    		
+    	});
+	}
+
+	/**
      * This method clones the state of the agent. It's used in the search
      * process, when creating the search tree.
      */
@@ -101,16 +135,19 @@ public class EstadoCarToy extends SearchBasedAgentState {
     	}
     	
     	List<Celda> eventosVecinosDescubiertos = carToyPerception.getEventosCercanosDescubiertos();
-    	if(eventosVecinosDescubiertos != null && eventosVecinosDescubiertos.size() > 1) {
+    	if(eventosVecinosDescubiertos != null) {
         	for(Celda e: eventosVecinosDescubiertos) {
-        		this.remove(e);
+        		if(eventosVecinosDescubiertos.size() > 1) {
+            		this.remove(e);
+                	this.sortEventosCercanos(this.posicionCarToy);
+        		}
         	}
     	}
     	
     	if(carToyPerception.getPosicionBoy() != null) {
     		this.posicionBoy = carToyPerception.getPosicionBoy();
     	}
-    	
+    	/*
     	final EstadoCarToy  agState = this;
     	
 		SwingUtilities.invokeLater(new Runnable() {
@@ -127,7 +164,7 @@ public class EstadoCarToy extends SearchBasedAgentState {
 
 				PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
 		    }
-		});
+		});*/
     }
 
     /**

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import frsf.cidisi.faia.state.EnvironmentState;
+import interfaz.PrincipalNueva;
 
 /**
  * This class represents the real world state.
@@ -21,8 +22,9 @@ public class EstadoAmbiente extends EnvironmentState {
     private List<Celda> eventosCercanos;
 	
 	public EstadoAmbiente() {
-        
-        this.casa = new Casa(Matriz.crearMatrizDesdeArchivo("mapa-chico.txt"));
+    	PrincipalNueva pp = PrincipalNueva.getInstancia();
+
+        this.casa = new Casa(Matriz.crearMatrizDesdeChar(pp.plano));
         this.eventosCercanos = new ArrayList<Celda>();
         this.initState();
     }
@@ -32,10 +34,19 @@ public class EstadoAmbiente extends EnvironmentState {
      */
     @Override
     public void initState() {
-    	this.posicionBoy = this.casa.getCelda(1,1);
-    	this.posicionCarToy = this.casa.getCelda(14,9);
-    	this.eventosCercanos.add(this.casa.getCelda(6, 5).clone());
-    	this.eventosCercanos.add(this.casa.getCelda(1, 1).clone());
+    	PrincipalNueva pp = PrincipalNueva.getInstancia();
+
+    	int x_agente = pp.posYagente, y_agente = pp.posXagente;
+    	int x_boy = pp.posYninio, y_boy = pp.posXninio;
+    	this.posicionBoy = this.casa.getCelda(x_boy,y_boy);
+    	this.posicionCarToy = this.casa.getCelda(x_agente,y_agente);
+    	
+    	if(this.casa.isBetweenLimits(pp.posYevento1, pp.posXevento1))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento1, pp.posXevento1).clone());
+    	if(this.casa.isBetweenLimits(pp.posYevento2, pp.posXevento2))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento2, pp.posXevento2).clone());
+    	if(this.casa.isBetweenLimits(pp.posYevento3, pp.posXevento3))
+    		this.eventosCercanos.add(this.casa.getCelda(pp.posYevento3, pp.posXevento3).clone());
     }
 
     /**

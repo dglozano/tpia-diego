@@ -14,56 +14,22 @@ public class Matriz {
 	private static int X_SIZE;
 	private static int Y_SIZE;
 	
-	public static Celda[][] crearMatrizDesdeArchivo(String ruta){
-		Celda[][] plano = null;
-		try {
-			BufferedReader br = getBuffered(ruta);
-			//lee el primer renglon y segundo renglon del archivo, donde esta el tamanio de la matriz
-			String lineaFilas =  br.readLine();
-			String lineaColumnas = br.readLine();
-			X_SIZE = Integer.parseInt(lineaFilas);
-			Y_SIZE = Integer.parseInt(lineaColumnas);
+	public static Celda[][] crearMatrizDesdeChar(char[][] matriz){
+			X_SIZE = matriz.length;
+			Y_SIZE = matriz[0].length;
 			
-			plano = new Celda[X_SIZE][Y_SIZE];
+			Celda[][] plano = new Celda[X_SIZE][Y_SIZE];
 			
-			//leo el resto
-			int fila = 0;
-			String linea = br.readLine();
-			while(linea != null){
-				//crea un arreglo con los caracteres del renglon separados por |
-				String[] values = linea.split(Pattern.quote("|"));
-				for (int i = 0; i<values.length; i++) {
-					//llama a crearCelda con el caracter de esa posicion del mapa como parametro
-					Celda celda = crearCelda(values[i].charAt(0));
-					celda.setX(fila);
-					celda.setY(i);
-					plano[fila][i] = celda;
+			for(int i=0;i<X_SIZE;i++) {
+				for(int j=0; j<Y_SIZE;j++) {
+					Celda celda = crearCelda(matriz[i][j]);
+					celda.setX(i);
+					celda.setY(j);
+					plano[i][j] = celda;
 				}
-				fila++;
-				linea = br.readLine();
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			
 		return plano;
-	}
-
-	private static BufferedReader getBuffered(String link){
-
-		FileReader lector = null;
-		BufferedReader br = null;
-		try {
-			File Arch=new File(link);
-			if(!Arch.exists()){
-				System.out.println("No existe el archivo");
-			}else{
-				lector = new FileReader(link);
-				br = new BufferedReader(lector);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return br;
 	}
 
 	private static Celda crearCelda (char caracter){
