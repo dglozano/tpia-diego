@@ -209,7 +209,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
         buttonGroup1.add(jRbNinio);
         jRbNinio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jRbNinio.setText("Niï¿½o/a");
+        jRbNinio.setText("Niño   ");
         jRbNinio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRbNinioActionPerformed(evt);
@@ -255,9 +255,9 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
         cbEstrategia.setFont(new java.awt.Font("Verdana", 0, 11)); // NOI18N
         cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-        		"Estrategia de Bï¿½squeda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
+        		"Estrategia de Búsqueda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
         cbEstrategia.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estrategia de Bï¿½squeda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
+        cbEstrategia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Estrategia de Búsqueda", "Amplitud", "Profunidad", "Costo Uniforme", "A *" }));
         cbEstrategia.setToolTipText("");
         cbEstrategia.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cbEstrategia.addActionListener(new java.awt.event.ActionListener() {
@@ -451,11 +451,10 @@ public class PrincipalNueva extends javax.swing.JFrame {
     }                                            
 
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO desde acï¿½ hay que enviar las posiciones del agente y del niï¿½o, y la estrategia de bï¿½squeda (con "cbEstrategia.getSelectedItem()");
     	if (jLabelPosAgente.getText()=="Inaccesible" || jLabelPosAgente.getText()=="(-- ; --)" || jLabelPosNinio.getText()=="Inaccesible" || jLabelPosNinio.getText()=="(-- ; --)"){
-    		JOptionPane.showMessageDialog(null, "Seleccione posiciones validas para el juguete y el niï¿½o.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione posiciones validas para el juguete y el niño.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else if (cbEstrategia.getSelectedIndex()==0){
-    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de busqueda.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de búsqueda.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else{
     		 // Runs outside of the Swing UI thread
     	    new Thread(new Runnable() {
@@ -665,33 +664,14 @@ public class PrincipalNueva extends javax.swing.JFrame {
                 	plano = CreaMatriz.matrizDesdeArchivo(f.getSelectedFile());
                 	crearTablero();
                 } catch (Exception x) {
-                    JOptionPane.showMessageDialog(null, "Archivo no valido.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Archivo no válido.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }        
     }
     
     public void exito(){
-    	JOptionPane.showMessageDialog(null, "El agente alcanzï¿½ la meta!", "ï¿½xito", JOptionPane.NO_OPTION);
-    	jPanelMapa.removeAll();
-    	jPanelMapa.updateUI();
-    	buttonGroup1.clearSelection();
-    	cbEstrategia.setSelectedIndex(0);
-        jLabelPosAgente.setText("(-- ; --)");
-        jLabelPosNinio.setText("(-- ; --)");
-        labelEvento1.setText("Sin Definir  ");
-        labelEvento2.setText("Sin Definir  ");
-        labelEvento3.setText("Sin Definir  ");
-    	exPosXagente = -1;
-    	exPosYagente = -1;
-    	exPosXninio = -1;
-    	exPosYninio = -1;
-    	exPosXevento1 = -1;
-    	exPosYevento1 = -1;
-    	exPosXevento2 = -1;
-    	exPosYevento2 = -1;
-    	exPosXevento3 = -1;
-    	exPosYevento3 = -1;
+    	JOptionPane.showMessageDialog(null, "El agente alcanzó la meta!", "Éxito", JOptionPane.NO_OPTION);
     }
     
     void itemSalir_ActionPerformed(ActionEvent e) {
