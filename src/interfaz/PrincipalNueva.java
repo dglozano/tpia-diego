@@ -11,6 +11,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.FileReader;
 
@@ -74,6 +76,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
     private PrincipalNueva() {
         initComponents();
+        this.addWindowListener(new EscuchaVentana());
         this.setExtendedState(MAXIMIZED_BOTH);
     }
     
@@ -439,15 +442,13 @@ public class PrincipalNueva extends javax.swing.JFrame {
     private void btnEjecutarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO desde acï¿½ hay que enviar las posiciones del agente y del niï¿½o, y la estrategia de bï¿½squeda (con "cbEstrategia.getSelectedItem()");
     	if (jLabelPosAgente.getText()=="Inaccesible" || jLabelPosAgente.getText()=="(-- ; --)" || jLabelPosNinio.getText()=="Inaccesible" || jLabelPosNinio.getText()=="(-- ; --)"){
-    		JOptionPane.showMessageDialog(null, "Seleccione posiciones vï¿½lidas para el juguete y el niï¿½o.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione posiciones validas para el juguete y el niño.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else if (cbEstrategia.getSelectedIndex()==0){
-    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de bï¿½squeda.", "Error", JOptionPane.WARNING_MESSAGE);
+    		JOptionPane.showMessageDialog(null, "Seleccione una estrategia de busqueda.", "Error", JOptionPane.WARNING_MESSAGE);
     	} else{
     		 // Runs outside of the Swing UI thread
     	    new Thread(new Runnable() {
     	      public void run() {
-    	    	  int cantFilas = plano.length;
-    	            int cantCol = plano[0].length;
     	    		CarToy agent = new CarToy();
     	            AmbienteCarToy environment = new AmbienteCarToy();
     	            SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(environment, agent);
@@ -666,6 +667,32 @@ public class PrincipalNueva extends javax.swing.JFrame {
     void itemSalir_ActionPerformed(ActionEvent e) {
         System.exit(0);
     }
+    
+    class EscuchaVentana implements WindowListener{
+        public void windowActivated(WindowEvent e){
+        }
+ 
+        public void windowClosed(WindowEvent e){
+        }
+ 
+        public void windowClosing(WindowEvent e){
+            System.exit(0);
+        }
+ 
+        public void windowDeactivated(WindowEvent e){
+        }
+ 
+        public void windowDeiconified(WindowEvent e){
+        }
+ 
+        public void windowIconified(WindowEvent e){
+        }
+ 
+        public void windowOpened(WindowEvent e){
+        }
+ 
+    }
+    
 
     /**
      * @param args the command line arguments
