@@ -147,24 +147,6 @@ public class EstadoCarToy extends SearchBasedAgentState {
     	if(carToyPerception.getPosicionBoy() != null) {
     		this.posicionBoy = carToyPerception.getPosicionBoy();
     	}
-    	/*
-    	final EstadoCarToy  agState = this;
-    	
-		SwingUtilities.invokeLater(new Runnable() {
-		    public void run() {
-		    	int x_ag = agState.getPosicionCarToy().getX();
-		    	int y_ag = agState.getPosicionCarToy().getY();
-		    	char[][] casaDisplay = agState.getCasa().getPlanoChars();
-		    	casaDisplay[x_ag][y_ag] = 'A';
-		    	if(agState.getPosicionBoy() !=null) {
-			    	int x_ch = agState.getPosicionBoy().getX();
-			    	int y_ch = agState.getPosicionBoy().getY();
-			    	casaDisplay[x_ch][y_ch] = 'B';
-		    	}
-
-				PrincipalNueva.getInstancia().actualizarTablero(casaDisplay);
-		    }
-		});*/
     }
 
     /**

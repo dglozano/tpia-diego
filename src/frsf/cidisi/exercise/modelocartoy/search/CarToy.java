@@ -50,10 +50,10 @@ public class CarToy extends SearchBasedAgent {
     	PrincipalNueva pp = PrincipalNueva.getInstancia();
     	switch(pp.getEstrategia()) {
     	case 1:
-    		strategy = new DepthFirstSearch();
+    		strategy = new BreathFirstSearch();
     		break;
     	case 2:
-    		strategy = new BreathFirstSearch();
+    		strategy = new DepthFirstSearch();
     		break;
     	case 3:
     		strategy = new UniformCostSearch(new CostFunction());
