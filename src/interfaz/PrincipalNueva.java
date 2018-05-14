@@ -207,7 +207,7 @@ public class PrincipalNueva extends javax.swing.JFrame {
 
         buttonGroup1.add(jRbNinio);
         jRbNinio.setFont(new java.awt.Font("Verdana", 0, 12)); // NOI18N
-        jRbNinio.setText("Ni�o   ");
+        jRbNinio.setText("Niño   ");
         jRbNinio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRbNinioActionPerformed(evt);
