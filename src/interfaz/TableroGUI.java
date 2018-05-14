@@ -9,7 +9,7 @@ import model.TipoSuelo;
 import utils.Matriz;
 
 public class TableroGUI extends javax.swing.JPanel {
-    private static ImageIcon comun, pared, obstaculo, pasto, puerta_abierta, puerta_cerrada, alfombra, agua, arena, basura, ropa, escalera_n, escalera_s, escalera_e, escalera_o, agente, ninio, oculto;
+    private static ImageIcon comun, pared, obstaculo, pasto, puerta_abierta, puerta_cerrada, alfombra, agua, arena, basura, ropa, escalera_n, escalera_s, escalera_e, escalera_o, agente, ninio, oculto, evento1, evento2, evento3;
     private CasillasGUI [][] casillas ;
     private int anchoCasilla;
     private char [] pisosAccesibles = {'_', '~','a', '\'', '!', '%', '*', '&', 'N', 'S', 'E', 'O', 'A', 'B'};
@@ -103,6 +103,15 @@ public class TableroGUI extends javax.swing.JPanel {
 		case 'x':
 			imagen=oculto;
 			break;
+		case '1':
+			imagen=evento1;
+			break;
+		case '2':
+			imagen=evento2;
+			break;
+		case '3':
+			imagen=evento3;
+			break;
 
 		default:
 			break;
@@ -127,6 +136,12 @@ public class TableroGUI extends javax.swing.JPanel {
     		fondo=agente;
     	} else if (i==2){
     		fondo=ninio;
+    	} else if (i==3){
+    		fondo=evento1;
+    	} else if (i==4){
+    		fondo=evento2;
+    	} else if (i==5){
+    		fondo=evento3;
     	}
         this.casillas[x][y].setFondo(fondo);
         this.repaint();
@@ -140,6 +155,11 @@ public class TableroGUI extends javax.swing.JPanel {
     public void setearFondo(int x, int y, ImageIcon fondoBackUp){
 
     	casillas[x][y].setFondo(fondoBackUp);
+    }       
+    
+    public void actualizaCelda(int x, int y){
+
+    	casillas[x][y].updateUI();
     }   
     
     public void setearAccesible(int x, int y, Boolean bool){
@@ -166,6 +186,9 @@ public class TableroGUI extends javax.swing.JPanel {
       this.agente = this.cargarFondo("agente.gif");
       this.ninio = this.cargarFondo("ninio.gif");
       this.oculto = this.cargarFondo("oculto.gif");
+      this.evento1 = this.cargarFondo("evento1.gif");
+      this.evento2 = this.cargarFondo("evento2.gif");
+      this.evento3 = this.cargarFondo("evento3.gif");
     }
 
     protected static ImageIcon cargarFondo(String ruta) {
